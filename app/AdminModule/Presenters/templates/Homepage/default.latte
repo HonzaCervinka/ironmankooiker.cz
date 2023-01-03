@@ -1,0 +1,40 @@
+{block content}
+<h1>Vyber projekt</h1>
+{form signInForm}
+    <div class="radio-buttons">
+        {foreach $form["project"]->items as $key => $label}
+            <label class="custom-radio">
+                <input type="radio" name="project" value="{$key}" onclick="changeBackgroundColor({$key})">
+                    <span class="radio-btn">
+                    <i class="fa-solid fa-check fa-2x"></i>
+                        <div class="hobbies-icon">
+                        <img src="{$basePath}/img/login/{$key}Icon.png">
+                        <p>{$label}</p>
+                        </div>
+                    </span>
+            </label>
+        {/foreach}
+    </div>
+    <div class="text">
+    {input username, class => ""}
+    {input password, class => ""}
+    </div>
+    {input send, class => "button login"}
+
+    <a class="button btn" data-toggle="tooltip" data-placement="top" n:href=":PanDeskovek:Homepage:default" title="Přihlásí tě do aplikace Pán deskovek. Tvoje funkce budou omezeny!">Vstoupit jako host</a>
+{/form}
+
+<div n:if="$user->isLoggedIn()">
+<a class="" n:href="Register:default">Registrace</a>
+<a class="" n:href="signOut">Odhlasit</a>
+</div>
+
+    <script>
+
+    function changeBackgroundColor(project)
+    {
+        document.body.style.backgroundImage = "url("+{$basePath}+"/www/img/login/Pozadi"+project+".jpg)";
+    }
+
+    document.querySelector('input[value="PanDeskovek"]').checked = true;
+    </script>

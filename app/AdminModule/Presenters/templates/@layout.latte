@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="shortcut icon" href="{$basePath}/img/ironman_logo.ico">
+    <!-- Bootstrap 4.5 CSS -->
+    <link rel="stylesheet" href="{$basePath}/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{$basePath}/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{$basePath}/css/lightbox.min.css">
+	<link rel="stylesheet" href="{$basePath}/css/login.css">
+	<script src="https://kit.fontawesome.com/b654b84b10.js" crossorigin="anonymous"></script>
+
+	<title>{ifset title}{include title|stripHtml} | {/ifset}Projekty</title>
+</head>
+
+<body>
+	<div class = "container">	
+	<div class = "col-lg-6 mx-auto">
+	<div n:foreach="$flashes as $flash" n:class="alert, 'alert-' . $flash->type">{$flash->message}</div>
+	</div>
+		{include content}
+	</div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+body {
+    overflow-x: hidden;
+    font-family: "Montserrat", sans-serif;
+    color: #616971;
+    background-color: #616971;
+}
+
+h1, h2, h3, h4 {
+    color: #000000;
+}
+
+h1 {
+    text-align: center;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+td {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+th, td {
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+
+nav ul {
+    list-style-type: none;
+}
+
+nav li {
+    float: left;
+    margin-right: 15px;
+}
+
+a {
+    color: #000000;
+}
+
+a:hover {
+    color:#616971;
+    text-decoration: none;
+}
+
+nav {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+
+
+nav .aktivni {
+    background: #444444;
+}
+
+.zprava {
+    border: 1px solid #9DC2F8;
+    background: #DBE8F8;
+    padding: 3px;
+}
+
+form {
+    color: #ffffff;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 5px;
+}
+
+.card:hover {
+    background: #4e4f4f;
+    color: #EEEEEE;
+    text-decoration: none;
+}
+
+.card a:hover {
+    color: #EEEEEE;
+}
+
+.clanek {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 0.25rem;
+}
+
+nav li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+nav a {
+    padding: 10px;
+}
+
+.style {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 0.25rem;
+}
+
+a:hover {
+    background: #4e4f4f;
+    color: #EEEEEE;
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+.navbar-toggler:hover {
+    background: #4e4f4f4e;
+}
+
+.navbar {
+    margin-bottom: 30px;
+}
+
+.active {
+    background: #4e4f4f;
+    color: #EEEEEE;
+    text-decoration: none;
+    border-radius: 0.25rem;
+}
+
+.active a {
+    color: #EEEEEE;
+}

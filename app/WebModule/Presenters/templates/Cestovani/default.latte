@@ -1,0 +1,47 @@
+{block keywords}Cestování se psem, obytným autem{/block}
+{block description}Cestujeme se psem do zahraníčí i v Česku převážně obtytným autem.{/block}
+{block title}Cestování{/block}
+
+{block content}
+    <div class="container">
+        <div class="col-12 text-center mt-5 px-0">
+            <h2 class="text-dark pt-4">Příběhy a tipy na výlety s pejskem u nás i v zahraničí </h2>
+            <div class="border-top border-primary w-100 mx-auto my-3"></div>
+        </div>
+    </div>
+
+    <!-- Blog -->
+    <div class="container">
+        <div class="row">
+
+            <!-- Blog post -->            
+            <?php 
+            $clanky = Db::queryAll('
+                SELECT *
+                FROM clanky
+                ORDER BY clanky_id DESC
+            ');
+            foreach ($clanky as $clanek)
+            {
+                ?>
+                <div class="col-sm-4 mb-3">
+                <div class="card">
+                <img class="card-img-top" src="img/blog/<?php echo(htmlspecialchars($clanek['url'])); ?>/nahled.jpg" alt="Card image cap">
+                <div class="card-body">        
+                <?php 
+                echo('<tr><td><h2>
+                    <a href="clanek.php?clanek=' . htmlspecialchars($clanek['url']) . '">
+                        ' . htmlspecialchars($clanek['titulek']) . '</a>
+                    </h2>' . htmlspecialchars($clanek['popisek']));
+                echo('</td></tr>');
+                ?>
+                    </div>
+                    <div class="card-footer text-muted"><?php echo (htmlspecialchars($clanek['datum'])) ?></div>
+                </div>
+                </div>
+                <?php 
+            } 
+            ?>
+        </div>
+    </div>
+{/block}

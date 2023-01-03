@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RDVPLHZWLD"></script>
+	<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){ dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'G-RDVPLHZWLD');
+	</script>
+
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="keywords" content="{block keywords}{/block}">
+	<meta name="description" content="{block description}{/block}">
+	<title>{block title}{/block}</title>
+
+    <link rel="shortcut icon" href="{$basePath}/img/ironman_logo.ico">
+    <!-- Bootstrap 4.5 CSS -->
+    <link rel="stylesheet" href="{$basePath}/css/bootstrap.min.css">
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="{$basePath}/css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Lihtbox -->
+    <link rel="stylesheet" href="{$basePath}/css/lightbox.min.css">
+
+</head>
+
+<body>
+    <!-- hlavicka -->
+    <div class="top-bar">
+    </div>
+
+	    <!-- Navigacni lista -->
+    <nav class="navbar bg-light navbar-light navbar-expand-lg sticky-top ">
+        <div class="container">
+
+            <a n:href="Homepage:default" class="navbar-brand"><img src="{$basePath}/img/logo.png" alt="Logo" title="Ironman"></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a n:href="Homepage:default" class="nav-link {ifCurrent Homepage:default}active{/ifCurrent}">O Irym</a></li>
+                    <li class="nav-item"><a n:href="Informace:default" class="nav-link {ifCurrent Informace:default}active{/ifCurrent}">Informace</a></li>
+                    <li class="nav-item"><a n:href="Cestovani:default" class="nav-link {ifCurrent Cestovani:default}active{/ifCurrent}">Cestování se psem</a></li>
+                    <li class="nav-item"><a n:href="Fotogalerie:default" class="nav-link {ifCurrent Fotogalerie:default}active{/ifCurrent}">Fotky</a></li>
+                    <li class="nav-item"><a href="#kontakt" class="nav-link">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+	
+	{include content}
+
+	<footer>
+        <div class="container">
+            <div class="row text-light text-center py-4 justify-content-center">
+                <div class="col-sm-10 col-md-8 col-lg-6">
+                    <img src="{$basePath}/img/logo.png" alt="">
+                    <hr class="bg-light">
+                    <h5 id="kontakt">Kontaktujte nás</h5>
+                    <hr class="bg-light">
+                    <p>+420 736 531 603</p>
+                    <p>+420 737 033 040</p>
+                    <p><a href="mailto:+veronika.gecova@gmail.com">veronika.gecova@gmail.com</a></p>
+                    <p><a href="mailto:+cervinka.j92@gmail.com">cervinka.j92@gmail.com</a></p>
+                    <ul class="social pt-3">
+                        {* <li><a href="https://www.facebook.com/jan.cervinka.75/" target="_blank"><i class="fab fa-facebook"></i></a></li> *}
+                        <li><a href="https://www.facebook.com/jan.cervinka.75/" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                        {* <li><a href="https://www.facebook.com/jan.cervinka.75/" target="_blank"><i class="fab fa-instagram"></i></a></li> *}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Start Socket -->
+    <div class="socket text-light text-center py-3">
+        <a href="admin">&copy; Jan Červinka</a>
+    </div>
+
+	{block scripts}
+	<script src="https://nette.github.io/resources/js/3/netteForms.min.js"></script>
+	    <!-- jQuery -->
+    <script src="{$basePath}/js/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap 4.5 JS -->
+    <script src="{$basePath}/js/bootstrap.min.js"></script>
+    <!-- Popper JS -->
+    <script src="{$basePath}/js/popper.min.js"></script>
+    <!-- Font Awesome -->
+    <script src="{$basePath}/js/all.min.js"></script>
+    	<!-- Lihtbox -->
+	<script src="{$basePath}/js/lightbox.min.js"></script>
+	{/block}
+</body>
+</html>

@@ -1,0 +1,22 @@
+parameters:
+
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+database:
+	dsn: 'mysql:host=127.0.0.1;dbname=ironmankooikercz4'
+	user: ironmankoo1
+	password: jtncKVChWZ38

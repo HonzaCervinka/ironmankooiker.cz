@@ -1,0 +1,95 @@
+{block title}Pán deskovek{/block}
+{block description}Pán deskovek{/block}
+{block content}
+<div class="row">		
+    <div class="col-lg-3 ">
+		<h1>Hodnoceni</h1>
+		<div class="dashboardTables table-sm">
+			<table class="table">
+				{foreach $playersPosition as $playerPosition}
+				<tbody>
+					<tr>
+						<td class="_{$playerPosition->rank} align-middle">{$playerPosition->player}</td>
+						<td class= "align-middle points">{$playerPosition->points}</td>
+						<td class= "align-middle vyher">výher</td>
+					</tr>
+				</tbody>
+				{/foreach}
+			</table>
+		</div>
+	</div>
+
+
+
+    <div class="col-lg-6 ">
+        <h1>Herní sezení</h1>
+		<div class="dashboardTables">
+			<table class="table center table-sm">
+				<thead>
+					<tr>
+						<th></th>
+						<th></th>
+						<th>Honza</th>
+						<th>Michal</th>
+						<th>Ševi</th>
+						<th>Johny</th>
+					</tr>
+				</thead>
+				{foreach $gameNights as $gameNight}
+				<tbody>
+					<tr>
+						<td class= "align-middle">{$gameNight->date|date:'d.m.Y'}</td>
+						<td class= "align-middle">{$gameNight->name}</td>
+						<td>
+						{if $gameNight->honza == 1} 
+						<img src="{$basePath}/img/panDeskovek/win.png "/>
+						{else} 
+						<img src="{$basePath}/img/panDeskovek/loss.png "/>
+						{/if}
+						</td>
+						<td>
+						{if $gameNight->michal == 1} 
+						<img src="{$basePath}/img/panDeskovek/win.png "/>
+						{else} 
+						<img src="{$basePath}/img/panDeskovek/loss.png "/>
+						{/if}
+						</td>
+						<td>
+						{if $gameNight->sevi == 1} 
+						<img src="{$basePath}/img/panDeskovek/win.png "/>
+						{else} 
+						<img src="{$basePath}/img/panDeskovek/loss.png "/>
+						{/if}
+						</td>
+						<td>
+						{if $gameNight->johny == 1} 
+						<img src="{$basePath}/img/panDeskovek/win.png "/>
+						{else} 
+						<img src="{$basePath}/img/panDeskovek/loss.png "/>
+						{/if}
+						</td>
+					</tr>
+				</tbody>
+				{/foreach}
+			</table>
+		</div>
+    </div>
+
+	    <div class="col-lg-3">
+		<h1>Seznam her</h1>
+		<div class="dashboardTables">
+			<table class="table table-sm">
+				{foreach $boardGames as $boardGame}
+				<tbody>
+					<tr>
+						<td>{$boardGame->name}</td>
+					</tr>
+				</tbody>
+				{/foreach}
+			</table>
+		</div>
+    </div>
+
+</div>
+
+{/block}
