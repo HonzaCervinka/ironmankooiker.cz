@@ -15,7 +15,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
     {
         $projects = [
             'PanDeskovek' => 'Pán deskovek',
-            'Cestovani' => 'Cestování',
+            'Blog' => 'Blog',
             'Recepty' => 'Recepty',
         ];
         $form = new Form();

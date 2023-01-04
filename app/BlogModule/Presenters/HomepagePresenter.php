@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\CestovaniModule\Presenters;
+namespace App\BlogModule\Presenters;
 
 use Nette;
 use App\Model\ArticleManager;

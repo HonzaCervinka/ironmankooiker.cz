@@ -21,8 +21,8 @@ final class RouterFactory
         $admin[] = new Route('admin/<presenter>/<action>[/<id>]', 'Homepage:default');
 		$router[] = $admin;
 
-		$hra = new RouteList('Cestovani');
-        $hra[] = new Route('cestovani/<action>[/<id>]', 'Homepage:default');
+		$hra = new RouteList('Blog');
+        $hra[] = new Route('blog/<action>[/<id>]', 'Homepage:default');
 		$router[] = $hra;
 
 		$hra = new RouteList('Recepty');
