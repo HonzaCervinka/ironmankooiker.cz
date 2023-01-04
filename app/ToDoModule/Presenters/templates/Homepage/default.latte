@@ -1,0 +1,36 @@
+{block content}
+	<div class="container">
+		<h1 n:block="title">Nákupy a úkoly</h1>
+		<div class="row justify-content-center">
+			<div class="col-sm-auto tabulky" >
+				<h2>Nákupní seznam</h2>
+				<div n:foreach="$shopping as $shop" class="shop">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>{$shop->goods}</td>
+								<td class="delete"><a n:href="RemoveShop! id=> $shop['id']"><i class="fa-solid fa-circle-check fa-2x " ></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				{control shopForm}
+			</div>
+
+			<div class="col-sm-auto tabulky">
+				<h2>Úkoly</h2>
+				<div n:foreach="$tasks as $task" class="shop">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>{$task->task}</td>
+								<td class="delete"><a n:href="RemoveTasks! id=> $task['id']"><i class="fa-solid fa-circle-check fa-2x" ></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				{control tasksForm}
+			</div>
+		</div>
+	</div>
+{/block}

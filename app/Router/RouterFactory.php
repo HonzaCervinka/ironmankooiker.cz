@@ -33,6 +33,10 @@ final class RouterFactory
         $hra[] = new Route('panDeskovek/<presenter>/<action>[/<id>]', 'Homepage:default');
 		$router[] = $hra;
 
+		$hra = new RouteList('ToDo');
+        $hra[] = new Route('todo/<presenter>/<action>[/<id>]', 'Homepage:default');
+		$router[] = $hra;
+
 		$web = new RouteList('Web');
         $web[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		$router[] = $web;
