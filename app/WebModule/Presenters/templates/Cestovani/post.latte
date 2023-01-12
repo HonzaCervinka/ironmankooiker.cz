@@ -1,0 +1,22 @@
+{block keywords}Cestování se psem, obytným autem{/block}
+{block description}Cestujeme se psem do zahraníčí i v Česku převážně obtytným autem.{/block}
+{block title}Cestování{/block}
+
+{block content}
+
+<article>
+    <section>
+        <div class="container">
+            <div class="col-12 text-center mt-5 px-0">
+                <h2 class="text-dark pt-4">{$post->title}</h2>
+                <div class="border-top border-primary w-100 mx-auto my-3"></div>            
+            </div>
+            <div class="date">{$post->created_at|date:'j. n. Y'}</div>    
+            <div class="clanek">
+                {$post->content|noescape}
+                <div class="border-top border-primary w-100 mx-auto my-3"></div>
+            </div>
+            <a n:href="Cestovani:default" class="btn btn-outline-dark btn-md mb-3"> &#8592 Zpět na články </a>
+        </div>
+    </section>
+</article>

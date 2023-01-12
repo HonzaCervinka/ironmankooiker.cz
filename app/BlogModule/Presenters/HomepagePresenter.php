@@ -12,6 +12,8 @@ use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
 use Nette\Database\UniqueConstraintViolationException;
 use Nette\Utils\ArrayHash;
+use Nette\Utils\Image;
+
 
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
@@ -67,11 +69,11 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
     protected function createComponentEditorForm(): Form
     {
         $form = new Form;
-        $form->addText('title', 'Titulek:')
+        $form->addText('title', 'Název')
             ->setRequired();
-        $form->addTextArea('content', 'Obsah:');
+        $form->addUpload('photo_title', 'Náhled');
+        $form->addTextArea('content', 'Obsah');
          //   ->setRequired();
-
         $form->addSubmit('send', 'Uložit a publikovat');
         $form->onSuccess[] = [$this, 'editorFormSucceeded'];
         return $form;
@@ -79,6 +81,13 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 
     public function editorFormSucceeded(ArrayHash $data)
     {
+        if($data['photo_title']->hasFile()){
+            $data['photo_title']->move(__DIR__.'/../../../www/img/blog/'.$data['title'].'_title.jpg');
+            $image = Image::fromFile(__DIR__.'/../../../www/img/blog/'.$data['title'].'_title.jpg');
+            $image->resize(676,380, Image::EXACT);
+            $image->save(__DIR__.'/../../../www/img/blog/'.$data['title'].'_title.jpg');
+            $data['photo_title'] = $data['title'].'_title.jpg';
+        }
         $post = $this->articleManager->saveArticle($data);
         $this->flashMessage('Článek byl úspěšně uložen.');
         $this->redirect('Homepage:Post', $post->id );

@@ -12,36 +12,21 @@
 
     <!-- Blog -->
     <div class="container">
-        <div class="row">
-
-            <!-- Blog post -->            
-            <?php 
-            $clanky = Db::queryAll('
-                SELECT *
-                FROM clanky
-                ORDER BY clanky_id DESC
-            ');
-            foreach ($clanky as $clanek)
-            {
-                ?>
+        <div class="row my-5">
+            {foreach $posts as $post}
                 <div class="col-sm-4 mb-3">
-                <div class="card">
-                <img class="card-img-top" src="img/blog/<?php echo(htmlspecialchars($clanek['url'])); ?>/nahled.jpg" alt="Card image cap">
-                <div class="card-body">        
-                <?php 
-                echo('<tr><td><h2>
-                    <a href="clanek.php?clanek=' . htmlspecialchars($clanek['url']) . '">
-                        ' . htmlspecialchars($clanek['titulek']) . '</a>
-                    </h2>' . htmlspecialchars($clanek['popisek']));
-                echo('</td></tr>');
-                ?>
+                    <div class="card">
+                        <img class="card-img-top" src="{$basePath}/img/blog/{$post->photo_title}" alt="Card image cap">
+                        <div class="card-body">        
+                            <tr><td>
+                            <h2><a href="{link Cestovani:Post $post->id}">{$post->title}</a></h2>
+                            <div>{$post->content|truncate:200|noescape}</div>
+                        </div>
+                        </div>
+                        <div class="card-footer text-muted">{$post->created_at|date:'j. n. Y'}</div>
                     </div>
-                    <div class="card-footer text-muted"><?php echo (htmlspecialchars($clanek['datum'])) ?></div>
                 </div>
-                </div>
-                <?php 
-            } 
-            ?>
+            {/foreach}
         </div>
     </div>
 {/block}
