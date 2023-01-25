@@ -80,7 +80,7 @@
     <div class="col-12 text-center mt-5">
         <h1 class="text-dark pt-4"><strong>Ironman z Ploužnické stáje</strong></h1>
         <div class="border-top border-primary w-50 mx-auto my-3"></div>
-        <p class="lead">Vítejte na stránkách věnované kachnímu psíkovi Ironmanovi. Pokud hledáte <a n:href="Informace:default">informace</a> pro Iryho budoucí nevěstu, nebo tip na <a n:href="Cestovani:default">výlety</a> s
+        <p class="lead">Stránky o kachním psíkovi Ironmanovi. Pokud hledáte <a n:href="Informace:default">informace</a> pro Iryho budoucí nevěstu, nebo tip na <a n:href="Cestovani:default">výlety</a> s
             pejskem, jste na správné adrese.</p>
     </div>
 
@@ -88,12 +88,12 @@
     <div class="container">
         <div class="row my-5">
             {foreach $posts as $post}
-                <div class="col-sm-4 mb-3">
+                <div class="col-md-4">
                     <div class="card">
                         <img class="card-img-top" src="{$basePath}/img/blog/{$post->photo_title}" alt="Card image cap">
                         <div class="card-body">        
                             <tr><td>
-                            <h2><a href="{link Cestovani:Post $post->id}">{$post->title}</a></h2>
+                            <h4><a href="{link Cestovani:Post $post->id}">{$post->title}</a></h4>
                             <div>{$post->content|truncate:200|noescape}</div>
                         </div>
                         </div>
