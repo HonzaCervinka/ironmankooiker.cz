@@ -1,10 +1,18 @@
 {block title}Výpis článků{/block}
 {block description}Výpis všech článků.{/block}
+{block mainTitle}{$post->title}{/block}
+{block mainBtn}fa-solid fa-arrow-left fa-xl{/block}
+{block mainBtnLocation}<a n:href="default" class="btn btn-primary">{/block}
+
 {block content}
-<p><a n:href="Homepage:default">← zpět na výpis příspěvků</a></p>
-
-<div class="date">{$post->created_at|date:'F j, Y'}</div>
-
-<h1>{$post->title}</h1>
-
-<div class="travel">{$post->content|noescape}</div>
+<article>
+    <section>
+        <img class="card-img-top" src="{$basePath}/img/blog/{$post->photo_title}" alt="Card image cap">
+        <div class="border-top border-primary w-100 mx-auto my-3"></div>
+        <div class="date">{$post->created_at|date:'F j, Y'}</div>
+        <div class="travel">{$post->content|noescape}</div>
+        <div class="border-top border-primary w-100 mx-auto my-3"></div>
+        <a n:href="editor $post->id" class="btn btn-success"><i class="fa-solid fa-pen-to-square "></i></a>
+        <a n:href="remove $post->id" class="btn btn-danger"><i class="fa-regular fa-trash"></i></a>
+    </section>
+</article>

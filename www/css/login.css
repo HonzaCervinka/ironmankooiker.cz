@@ -171,3 +171,37 @@ display: none;
     border: 3px solid #7770d4;
 }
 
+.register {
+  color: #e7e7e7;
+}
+
+.center {
+  text-align: center;
+}
+
+.center a {
+  margin: 0 auto;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  display: block;
+  width: 250px;
+  padding: 10px 20px;
+  text-align: center;
+  border: none;
+  background: #a29bfe;
+  outline: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.center a:hover {
+  background-color: #7770d4;
+  text-decoration: none;
+}
+
+.alert {
+  text-align: center;
+}

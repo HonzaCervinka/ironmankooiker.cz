@@ -1,15 +1,27 @@
-{block title}Výpis článků{/block}
-{block description}Výpis všech článků.{/block}
+{block title}Články{/block}
+{block description}Články{/block}
+{block mainTitle}Články{/block}
+{block mainBtn}fa-solid fa-plus fa-xl{/block}
+{block mainBtnLocation}<a n:href="editor" class="btn btn-primary">{/block}
 {block content}
-<table>
-	{foreach $posts as $post}
-	<div class="post">
-		<h2><a href="{link Homepage:Post $post->id}">{$post->title}</a></h2>
-		<div class="date">{$post->created_at|date:'F j, Y'}</div>
-		<div>{$post->content|truncate:256|noescape}</div>
-		<a n:href="remove $post->id">Odstranit</a>
-		<a n:href="editor $post->id">editovat</a>
-	</div>
-	{/foreach}
-</table>
-<a n:href="editor">Napsat nový příspěvek</a>
+
+		<div class="row">
+            {foreach $posts as $post}
+                <div class="col-lg-4">
+                    <div class="card">
+                        <img class="card-img-top" src="{$basePath}/img/blog/{$post->photo_title}" alt="Card image cap">
+                        <div class="card-body">        
+                            <tr><td>
+                            <h4><a href="{link Homepage:Post $post->id}">{$post->title}</a></h4>
+                            <div>{$post->content|truncate:200|noescape}</div>
+                        </div>
+                        <div class="card-footer text-muted">{$post->created_at|date:'j. n. Y'}
+                            <div class="controlBtn">
+                            <a n:href="editor $post->id" class="btn btn-success"><i class="fa-solid fa-pen-to-square "></i></a>
+                            <a n:href="remove $post->id" class="btn btn-danger"><i class="fa-regular fa-trash"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {/foreach}
+        </div>

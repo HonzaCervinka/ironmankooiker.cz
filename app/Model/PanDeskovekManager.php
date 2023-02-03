@@ -43,7 +43,7 @@ class PanDeskovekManager extends DatabaseManager
      */
     public function getGameNights()
     {
-        return $this->database->query('SELECT date, name, honza, michal, sevi, johny FROM `gameNight`JOIN `boardgame_list` ON id_game = boardgame_id ORDER BY gameNight_id DESC;');
+        return $this->database->query('SELECT date, name, honza, michal, sevi, johny, gameNight_id FROM `gameNight`JOIN `boardgame_list` ON id_game = boardgame_id ORDER BY gameNight_id DESC;');
     }
 
     /**
@@ -88,14 +88,24 @@ class PanDeskovekManager extends DatabaseManager
     }
            
     /**
-     * Odstraní článek s danou URL.
+     * Odstraní hru podle ID
      * @param int $postId ID článku
      */
-    public function removeArticle(int $postId)
+    public function removeBoardgame(int $postID)
     {
-        $this->database->table(self::BOARDGAME_TABLE_NAME)->where(self::BOARDGAME_COLUMN_ID, $postId)->delete();
+        $this->database->table(self::BOARDGAME_TABLE_NAME)->where(self::BOARDGAME_COLUMN_ID, $postID)->delete();
     }
-
+    
+    /**
+     * removeGameNight
+     * Odstrani herni sezeni podle ID
+     * @param  mixed $postID herniho sezeni
+     * @return void
+     */
+    public function removeGameNight(int $postID)
+    {
+        $this->database->table(self::GAMENIGHT_TABLE_NAME)->where(self::GAMENIGHT_COLUMN_ID, $postID)->delete();
+    }
     
     /**
      * saveBoardgame

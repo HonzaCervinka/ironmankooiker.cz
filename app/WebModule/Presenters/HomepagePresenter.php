@@ -26,7 +26,7 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         /** Načte a předá seznam článků do šablony. */
         public function renderDefault()
         {
-            $this->template->posts = $this->articleManager->getTravels();
+            $this->template->posts = $this->articleManager->getTravels(3);
         }
 
         /**

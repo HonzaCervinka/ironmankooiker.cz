@@ -20,6 +20,12 @@ class AuthorizatorFactory
         $acl->addResource('PanDeskovek:Base');
         $acl->addResource('PanDeskovek');
 
+        $acl->addResource('Recepty:Homepage');
+        $acl->addResource('Recepty');
+
+        $acl->addResource('Blog:Homepage');
+        $acl->addResource('Blog');
+
         $acl->allow('admin');
         $acl->allow('guest', 'PanDeskovek:Homepage');
         $acl->allow('guest', 'PanDeskovek:Statistic');       

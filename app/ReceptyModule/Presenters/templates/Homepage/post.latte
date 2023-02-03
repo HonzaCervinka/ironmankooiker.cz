@@ -1,10 +1,10 @@
 {block title}Výpis článků{/block}
 {block description}Výpis všech článků.{/block}
 {block content}
-<p><a n:href="Homepage:default">← zpět na výpis příspěvků</a></p>
+<div class="container">
+    <p><a n:href="Homepage:default" class="btn btn-primary"><i class="fa-solid fa-arrow-left fa-xl"></i></a></p>
 
-<div class="date">{$post->created_at|date:'F j, Y'}</div>
+    <h1>{$post->title}</h1>
 
-<h1>{$post->title}</h1>
-
-<div class="travel">{$post->content|noescape}</div>
+    <div class="travel">{$post->recipe|noescape}</div>
+</div>

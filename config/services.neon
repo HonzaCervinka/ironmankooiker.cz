@@ -3,4 +3,5 @@ services:
 	- App\Model\MyAuthenticator
 	- App\Model\ArticleManager
 	- App\Model\PanDeskovekManager
+	- App\Model\ReceptyManager
 	- App\Security\AuthorizatorFactory::create

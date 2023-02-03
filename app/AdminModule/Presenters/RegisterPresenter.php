@@ -29,8 +29,6 @@ final class RegisterPresenter extends Nette\Application\UI\Presenter
 
     public function createComponentRegisterForm(): Form
     {
-
-
         $form = new Form();
         $form->addText('username','Username');
         $form->addPassword('password', 'Password');

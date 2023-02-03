@@ -24,7 +24,6 @@ abstract class BasePresenter extends Presenter
             parent::__construct();
             $this->panDeskovekManager = $panDeskovekManager;
         }
-
     
     protected function startup(): void {
         parent::startup();
@@ -34,7 +33,6 @@ abstract class BasePresenter extends Presenter
         }
     }
     
-
     protected function createComponentAddGameForm(): Form
     {
         $form = new Form();
@@ -48,11 +46,11 @@ abstract class BasePresenter extends Presenter
     public function addGameFormSucceeded(ArrayHash $data)
     {
         if (!$this->getUser()->isAllowed('PanDeskovek', 'addGame')) {
-            $this->flashMessage('Pro tuto akci nemáš dostatečná oprávnění.');
+            $this->flashMessage('Pro tuto akci nemáš dostatečná oprávnění.', 'danger');
             $this->redirect('this');
         }
         $post = $this->panDeskovekManager->saveBoardgame($data);
-        $this->flashMessage('Hra byla úspěšně přidána');
+        $this->flashMessage('Hra byla úspěšně přidána', 'success');
         $this->redirect('this');
     }
 
@@ -79,19 +77,52 @@ abstract class BasePresenter extends Presenter
     public function addGameNightFormSucceeded(ArrayHash $data)
     {
         if (!$this->getUser()->isAllowed('PanDeskovek', 'addGame')) {
-            $this->flashMessage('Pro tuto akci nemáš dostatečná oprávnění.');
+            $this->flashMessage('Pro tuto akci nemáš dostatečná oprávnění.', 'danger');
             $this->redirect('this');
         }
         $post = $this->panDeskovekManager->saveGameNight($data);
-        $this->flashMessage('Hra byla úspěšně přidána');
+        $this->flashMessage('Hra byla úspěšně přidána','sucess');
         $this->redirect('this');
     }
 
     public function actionSignOut()
     {
-        $this->getUser()->logout();
+        $this->getUser()->logout(true);
         $this->flashMessage('Odhlasil ses', 'info');
         $this->redirect(':Admin:Homepage:default');
     }
 
+    /**
+     * actionRemoveBoardGame
+     * Odstrani deskovou hru
+     * @param  mixed $postID
+     * @return void
+     */
+    public function actionRemoveBoardGame(int $postID)
+    {
+        if (!$this->getUser()->isAllowed('PanDeskovek', 'RemoveBoardGame')) {
+            $this->flashMessage('Pro tuto akci nemáš dostatečná oprávnění', 'danger');
+            $this->redirect('Homepage:default');
+        }
+        $this->panDeskovekManager->removeBoardgame($postID);
+        $this->flashMessage('Hra byla odstraněna', 'success');
+        $this->redirect('Homepage:default');
+    }
+    
+    /**
+     * actionRemoveGameNight
+     * Odstrani herni sezeni
+     * @param  mixed $postID
+     * @return void
+     */
+    public function actionRemoveGameNight(int $postID)
+    {
+        if (!$this->getUser()->isAllowed('PanDeskovek', 'RemoveGameNight')) {
+            $this->flashMessage('Pro tuto akci nemáš dostatečná oprávnění', 'danger');
+            $this->redirect('Homepage:default');
+        }
+        $this->panDeskovekManager->RemoveGameNight($postID);
+        $this->flashMessage('Herní sezení bylo odstraněno', 'success');
+        $this->redirect('Homepage:default');
+    }
 }

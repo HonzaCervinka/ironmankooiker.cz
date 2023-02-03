@@ -68,6 +68,7 @@
 						<img src="{$basePath}/img/panDeskovek/loss.png "/>
 						{/if}
 						</td>
+						<td class="delete"><a n:href="removeGameNight $gameNight->gameNight_id"><i class="fa-solid fa-trash"></i></a></td>
 					</tr>
 				</tbody>
 				{/foreach}
@@ -83,6 +84,7 @@
 				<tbody>
 					<tr>
 						<td>{$boardGame->name}</td>
+						<td class="delete"><a n:href="removeBoardgame $boardGame->boardgame_id"><i class="fa-solid fa-trash"></i></a></td>
 					</tr>
 				</tbody>
 				{/foreach}

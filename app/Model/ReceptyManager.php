@@ -15,42 +15,36 @@ use Nette\Utils\ArrayHash;
  * @package App\CoreModule\Model
  */
 
-class ArticleManager extends DatabaseManager
+class ReceptyManager extends DatabaseManager
 {
     const
-        TABLE_NAME = 'travel_posts',
-        COLUMN_ID = 'id';
+        TABLE_NAME = 'recipes',
+        COLUMN_ID = 'recipes_id';
 
-    
     /**
-     * getTravels
-     * Vrátí určitý počet článků
-     * @param  mixed $limit určí kolik článků se vrátí. Při zadané 0 vrátí všechny
+     * getRecipes
+     * Vrátí všechny recepty
      * @return void
      */
-    public function getTravels($limit)
+    public function getRecipes()
     {
-        if ($limit)
-            return $this->database->table(SELF::TABLE_NAME)->order(self::COLUMN_ID . ' DESC')->limit($limit);
-        else
-            return $this->database->table(SELF::TABLE_NAME)->order(self::COLUMN_ID . ' DESC');
-
+        return $this->database->table(SELF::TABLE_NAME)->order(self::COLUMN_ID . ' DESC');
     }    
          
     /**
-     * Vrátí článek z databáze podle jeho ID.
+     * Vrátí recept z databáze podle jeho ID.
      * @param  mixed $postId ID clanku
      *      */
-    public function getTravel($postId)
+    public function getRecipe($postId)
     {
         return $this->database->table(self::TABLE_NAME)->where(self::COLUMN_ID, $postId)->fetch();
     }
     
     /**
-     * Odstraní článek.
+     * Odstraní recept z databaze podle jeho ID.
      * @param int $postId ID článku
      */
-    public function removeArticle(int $postId)
+    public function removeRecipe(int $postId)
     {
         $this->database->table(self::TABLE_NAME)->where(self::COLUMN_ID, $postId)->delete();
     }
@@ -59,7 +53,7 @@ class ArticleManager extends DatabaseManager
      * Uloží nebo updatuje článek
      * @param int $postId ID článku
      */
-    public function saveArticle(ArrayHash $data)
+    public function saveRecipe(ArrayHash $data)
     {
         if (empty($data[self::COLUMN_ID])) {
             unset($data[self::COLUMN_ID]);

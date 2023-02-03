@@ -24,9 +24,9 @@
     <a class="button btn" data-toggle="tooltip" data-placement="top" n:href=":PanDeskovek:Homepage:default" title="Přihlásí tě do aplikace Pán deskovek. Tvoje funkce budou omezeny!">Vstoupit jako host</a>
 {/form}
 
-<div n:if="$user->isLoggedIn()">
-<a class="" n:href="Register:default">Registrace</a>
-<a class="" n:href="signOut">Odhlasit</a>
+<div class="center" n:if="$user->isLoggedIn()">
+<a n:href="Register:default">Nová registrace</a>
+<a n:href="signOut">Odhlasit se</a>
 </div>
 
     <script>

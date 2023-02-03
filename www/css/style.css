@@ -5,7 +5,7 @@ body {
   color: #616971;
 }
 
-/*============= TOP BAR HEADER =============*/
+/*============= TOP BAR Hlavicka =============*/
 
 .top-bar {
   background: white;
@@ -13,7 +13,7 @@ body {
   padding: 0.5rem 0;
 }
 
-/*============= NAVIGATION =============*/
+/*============= Navigace =============*/
 
 .navbar-brand img {
   height: 4rem;
@@ -48,24 +48,6 @@ body {
   /*-- barva aktivniho linku --*/
   color: #ad4c0b !important;
   font-weight: bold;
-}
-
-/*============= CAROUSEL =============*/
-
-#carousel {
-  /*-- uvodni fotky --*/
-  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.1); /*-- stinovani fotek --*/
-}
-.carousel-inner {
-  max-height: 38rem !important; /*-- výska fotek --*/
-}
-
-/*---Change Carousel Transition Speed --*/
-
-.carousel-item-next,  /*-- posun vred --*/
-.carousel-item-prev,  /*-- posun vzad --*/
-.carousel-item-active {
-  transition: transform 1.2s ease; /*-- rychlost posunu fotek --*/
 }
 
 /*-- Carousel Content --*/
@@ -154,7 +136,7 @@ body {
   font-size: 2rem;
 }
 
-/*============= FOOTER =============*/
+/*============= Paticka =============*/
 
 footer {
   background-color: #383838;
@@ -300,8 +282,12 @@ a.active {
     text-align: center;
 }
 
+.clanek {
+  text-align: left;
+}
+
 .clanek img {
-    width: 100%;
+    width: 100% !important;
 }
 
 .flash {

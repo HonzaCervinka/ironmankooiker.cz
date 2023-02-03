@@ -16,6 +16,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+		<script src="https://kit.fontawesome.com/b654b84b10.js" crossorigin="anonymous"></script>
 	{/block}
 	</head>
 
@@ -25,37 +26,34 @@
 <body>
 
 	<header class="main-header">
-		    <!-- Navigacni lista -->
+	<!-- Navigacni lista -->
     <nav class="navbar bg-dark navbar-dark navbar-expand-lg sticky-top ">
-            <a n:href="Homepage:default" class="navbar-brand">Pán deskovek</a>
+        <a n:href="Homepage:default" class="navbar-brand">Pán deskovek</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+			<span class="navbar-toggler-icon"></span>
+        </button>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav">
-					<li class="nav-item"><a n:href="Homepage:default" class="nav-link {ifCurrent Homepage:default}active{/ifCurrent}">Souhrn</a></li>
-					<li class="nav-item"><a n:href="Statistic:default" class="nav-link {ifCurrent Statistic:default}active{/ifCurrent}">Statistiky</a></li>
-                    {if $user->isAllowed('PanDeskovek', 'addGame')}
-					<li class="nav-item"><a href="#kontakt" class="nav-link" data-toggle="modal" data-target="#addGameModal">Přidat hru</a></li>
-					{/if}
-					{if $user->isAllowed('PanDeskovek', 'addGameNight')}
-					<li class="nav-item"><a href="#kontakt" class="nav-link" data-toggle="modal" data-target="#addGameNightModal">Přidat sezení</a></li>
-					{/if}
-                </ul>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav">
+				<li class="nav-item"><a n:href="Homepage:default" class="nav-link {ifCurrent Homepage:default}active{/ifCurrent}">Souhrn</a></li>
+				<li class="nav-item"><a n:href="Statistic:default" class="nav-link {ifCurrent Statistic:default}active{/ifCurrent}">Statistiky</a></li>
+                {if $user->isAllowed('PanDeskovek', 'addGame')}
+				<li class="nav-item"><a href="#kontakt" class="nav-link" data-toggle="modal" data-target="#addGameModal">Přidat hru</a></li>
+				{/if}
+				{if $user->isAllowed('PanDeskovek', 'addGameNight')}
+				<li class="nav-item"><a href="#kontakt" class="nav-link" data-toggle="modal" data-target="#addGameNightModal">Přidat sezení</a></li>
+				{/if}
+            </ul>
+        </div>
+		<div>
+		{$user->isLoggedIn() ? "{$user->getIdentity()->username} má práva {$user->getRoles()[0]}" : "Jsi tu jako host, můžeš se pouze dívat"}
+			<div>
+			<a class="" n:href="signOut">Odhlasit se</a>
+			</div>
+		</div>	
     </nav>
-	<div>
-	jste přihlášený jako {$user->getRoles()[0]}
-	<div>
-	<a class="" n:href="signOut">Odhlasit</a>
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-	<div>
-
-	</div>
+		<div n:foreach="$flashes as $flash" n:class="center, alert, 'alert-' . $flash->type">{$flash->message}</div>
 	</header>
-
 	{include content}
 
 	<!-- The Modal -->
