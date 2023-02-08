@@ -103,12 +103,22 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 
     public function editorFormSucceeded(ArrayHash $data)
     {
-        if($data['photo_title']->hasFile()){
-            $data['photo_title']->move(__DIR__.'/../../../www/img/blog/nahled/'.$data['title'].'_title.jpg');
-            $image = Image::fromFile(__DIR__.'/../../../www/img/blog/nahled/'.$data['title'].'_title.jpg');
+        if($data['photo_title']->hasFile())
+        {
+            $uploadPath = __DIR__.'/../../../www/img/blog/nahled/';
+            $uniqid = uniqid();
+            $file_name_image = 'nahled-' . $uniqid . $data['photo_title']->getName();
+    
+            $data['photo_title']->move($uploadPath .  $file_name_image);
+            
+            $image = Image::fromFile($uploadPath . $file_name_image);
+            
+            $completFilePath = $uploadPath . $file_name_image;
+            $this->fixRotateImage($image, $completFilePath);
+        //    $this->correctImageOrientation($file_name_image);
             $image->resize(1920,1080, Image::EXACT);
-            $image->save(__DIR__.'/../../../www/img/blog/nahled/'.$data['title'].'_title.jpg');
-            $data['photo_title'] = $data['title'].'_title.jpg';
+            $image->save($uploadPath . $file_name_image, 80, Image::JPEG);
+            $data['photo_title'] = $file_name_image;
         }
         $post = $this->articleManager->saveArticle($data);
         $this->flashMessage('Článek byl úspěšně uložen.');
@@ -128,6 +138,9 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $insertedImage->move($uploadPath . $file_name_image);
 
         $image = Image::fromFile($uploadPath . $file_name_image);
+        $completFilePath = $uploadPath . $file_name_image;
+        $this->fixRotateImage($image, $completFilePath);
+        
         $image->resize(1180, 1920, Image::FIT);
         $image->save($uploadPath . $file_name_image, 100, Image::JPEG);
 
@@ -136,4 +149,23 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
             'location' => ($pathToImage . $file_name_image),
         ]);
     }
+
+    public function fixRotateImage($image, $completFilePath) {
+        bdump($image);
+        $ex = @exif_read_data($completFilePath, 'EXIF');
+        if(!empty($ex['Orientation'])) {
+            switch($ex['Orientation']) {
+                case 8:
+                    $image->rotate(90, 0);
+                    break;
+                case 3:
+                    $image->rotate(180, 0);
+                    break;
+                case 6:
+                    $image->rotate(-90, 0);
+                    break;
+            }
+        }
+    }
+
 }
