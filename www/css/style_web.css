@@ -29,3 +29,7 @@ h4 {
     text-align: right;
     font-size: 0.8rem;
 }
+
+.container {
+    margin-bottom: 50px;
+}
