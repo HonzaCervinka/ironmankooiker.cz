@@ -15,7 +15,7 @@
                             <h4><a href="{link Homepage:Post $post->id}">{$post->title}</a></h4>
                             <div>{$post->content|truncate:200|noescape}</div>
                         </div>
-                        <div class="card-footer text-muted">{$post->created_at|date:'j. n. Y'}
+                        <div class="card-footer text-muted">{$post->date|date:'j. n. Y'}
                             <div class="controlBtn">
                             <a n:href="editor $post->id" class="btn btn-success"><i class="fa-solid fa-pen-to-square "></i></a>
                             <a n:href="remove $post->id" class="btn btn-danger"><i class="fa-regular fa-trash"></i></a>

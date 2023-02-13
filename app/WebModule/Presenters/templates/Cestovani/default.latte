@@ -22,7 +22,7 @@
                             <h4><a href="{link Cestovani:Post $post->id}">{$post->title}</a></h4>
                             <div>{$post->content|truncate:200|noescape}</div>
                         </div>
-                        <div class="card-footer text-muted">{$post->created_at|date:'j. n. Y'}</div>
+                        <div class="card-footer text-muted">{$post->date|date:'j. n. Y'}</div>
                     </div>
                 </div>
             {/foreach}

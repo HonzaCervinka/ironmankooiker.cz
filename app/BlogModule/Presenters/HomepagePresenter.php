@@ -86,6 +86,9 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $form->addText('title', 'Název')
             ->setRequired();
         $form->addUpload('photo_title', 'Vyber');
+        $form->addText('date', 'Datum')
+            ->setHtmlType('date')
+            ->setRequired();
         $form->addTextArea('content', 'Obsah');
          //   ->setRequired();
         $form->addSubmit('send', 'Uložit a publikovat')
