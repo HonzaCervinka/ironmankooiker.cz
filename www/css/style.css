@@ -53,8 +53,8 @@ body {
 /*-- Carousel Content --*/
 .carousel-caption {
   /*-- posunujici fotky --*/
-  position: absolute; /*--  --*/
-  top: 47%; /*--  --*/
+  position: absolute; /*-- absolutni pozice --*/
+  top: 51%; /*-- posunuti obashu v ramecku od vrchu stranky --*/
   transform: translateY(-50%); /*--  --*/
   text-transform: uppercase; /*-- predela text na velka pismena --*/
 }
