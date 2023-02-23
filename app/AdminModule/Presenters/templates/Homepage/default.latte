@@ -1,6 +1,9 @@
 {block content}
 <h1>Vyber projekt</h1>
 {form signInForm}
+    <div class = "col-lg-6 mx-auto">
+        <div n:foreach="$form->errors as $error" n:class="alert, alert-danger" n:if="$form->hasErrors()">{$error}</div>
+    </div>
     <div class="radio-buttons">
         {foreach $form["project"]->items as $key => $label}
             <label class="custom-radio">

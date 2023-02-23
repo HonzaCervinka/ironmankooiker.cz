@@ -6,50 +6,31 @@ namespace App\AdminModule\Presenters;
 
 use Nette;
 use Nette\Application\UI\Form;
+use App\AdminModule\Forms\SignInFormFactory;
+
 
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
+	public function __construct(
+		private SignInFormFactory $signInFactory
+	) {}
 
-
-    public function createComponentSignInForm(): Form
+    protected function createComponentSignInForm(): Form
     {
-        $projects = [
-            'PanDeskovek' => 'Pán deskovek',
-            'Blog' => 'Blog',
-            'Recepty' => 'Recepty',
-        ];
-        $form = new Form();
-        $form->addRadioList('project', '', $projects);
-        $form->setHtmlAttribute('class', 'login-form');
-        $form->addText('username','')
-            ->setRequired()
-            ->setHtmlAttribute('placeholder', 'Jméno');
-        $form->addPassword('password', '')
-            ->setRequired()
-            ->setHtmlAttribute('placeholder', 'Heslo');
-        $form->addSubmit('send', 'Přihlásit');
-        $form->onSuccess[] = [$this, 'signInFormSuccess'];
-
+        $form = $this->signInFactory->create();
+        $form->onSuccess[] = function (Form $form) {
+            $values = $form->getValues();
+			$this->redirect(":" .$values->project. ":Homepage:default");
+		};
         return $form;
     }
-
-    public function signInFormSuccess($form)
-    {
-        $values = $form->getValues();
-        try {
-            $this->getUser()->login($values->username, $values->password);
-        } catch (Nette\Security\AuthenticationException $e) {
-            $this->flashMessage($e->getMessage(), 'danger');
-            $this->redirect('default');
-        }
-        
-        $this->redirect(":" .$values->project. ":Homepage:default");
-    }
-
+    
     public function actionSignOut()
     {
         $this->getUser()->logout();
         $this->flashMessage('Odhlasil ses', 'info');
         $this->redirect('Homepage:default');
     }
+
+
 }

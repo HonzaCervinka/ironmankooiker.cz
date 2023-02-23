@@ -13,18 +13,19 @@ use Nette\Application\UI\Form;
 use Nette\Database\UniqueConstraintViolationException;
 use Nette\Utils\ArrayHash;
 use Nette\Utils\Image;
+use App\BlogModule\Forms\EditorFormFactory;
 
 
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
-    /** @var ArticleManager Model pro správu s článků. */
-    private $articleManager;
-
     /**
      * Konstruktor s injektovaným modelem pro správu článků.
      * @param ArticleManager $travelManager automaticky injektovaný model pro správu článků
      */
-    public function __construct(ArticleManager $articleManager)
+    public function __construct(
+        private ArticleManager $articleManager,
+        private EditorFormFactory $editorFactory,
+        )
     {
         parent::__construct();
         $this->articleManager = $articleManager;
@@ -65,6 +66,13 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $this->flashMessage('Článek byl úspěšně odstraněn.', 'primary');
         $this->redirect('Homepage:default');
     }
+
+    public function actionSignOut()
+    {
+        $this->getUser()->logout(true);
+        $this->flashMessage('Odhlasil ses', 'info');
+        $this->redirect(':Admin:Homepage:default');
+    }
     
     /**
      * Vykresluje formulář pro editaci článku podle zadané ID.
@@ -82,49 +90,12 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
 
     protected function createComponentEditorForm(): Form
     {
-        $form = new Form;
-        $form->addText('title', 'Název')
-            ->setRequired();
-        $form->addUpload('photo_title', 'Vyber');
-        $form->addText('date', 'Datum')
-            ->setHtmlType('date')
-            ->setRequired();
-        $form->addTextArea('content', 'Obsah');
-         //   ->setRequired();
-        $form->addSubmit('send', 'Uložit a publikovat')
-            ->setHtmlAttribute('class', 'btn btn-success');
-        $form->onSuccess[] = [$this, 'editorFormSucceeded'];
+        $form = $this->editorFactory->create();
+        $form->onSuccess[] = function (Form $form) {
+            $this->redirect('Homepage:default');
+		};
         return $form;
     }
-
-    public function actionSignOut()
-    {
-        $this->getUser()->logout(true);
-        $this->flashMessage('Odhlasil ses', 'info');
-        $this->redirect(':Admin:Homepage:default');
-    }
-
-    public function editorFormSucceeded(ArrayHash $data)
-    {
-        if($data['photo_title']->hasFile())
-           {
-            $uploadPath = __DIR__.'/../../../www/img/blog/nahled/';
-            $uniqid = uniqid();
-            
-            $file_name_image = 'nahled-' . $uniqid . $data['photo_title']->getName();
-            $data['photo_title']->move($uploadPath .  $file_name_image);
-            $image = Image::fromFile($uploadPath . $file_name_image);
-            $image->resize(1920,1080, Image::EXACT);
-            $completFilePath = $uploadPath . $file_name_image;
-            $this->fixRotateImage($image, $completFilePath);
-            
-            $image->save($uploadPath . $file_name_image, 80, Image::JPEG);
-            $data['photo_title'] = $file_name_image;
-        }
-        $post = $this->articleManager->saveArticle($data);
-        $this->flashMessage('Článek byl úspěšně uložen.');
-        $this->redirect('Homepage:Post', $post->id );
-    }   
 
     public function actiontinymceInsertImage(): void
     {
@@ -169,5 +140,4 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
             }
         }
     }
-
 }

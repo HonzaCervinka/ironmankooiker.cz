@@ -9,17 +9,20 @@ use Nette\Application\UI\Form;
 use Nette\Application\UI\Presenter;
 use App\Model\PanDeskovekManager;
 use Nette\Utils\ArrayHash;
+use App\PanDeskovekModule\Forms\AddGameFormFactory;
+use App\PanDeskovekModule\Forms\AddGameNightFormFactory;
 
 abstract class BasePresenter extends Presenter
 {
-        /** @var PanDeskovekManager Model pro správu s článků. */
-        public $panDeskovekManager;
-
         /**
          * Konstruktor s injektovaným modelem pro správu článků.
          * @param PanDeskovekManager $travelManager automaticky injektovaný model pro správu článků
          */
-        public function __construct(PanDeskovekManager $panDeskovekManager)
+        public function __construct(
+            public PanDeskovekManager $panDeskovekManager,
+            public AddGameFormFactory $addGameFormFactory,
+            public AddGameNightFormFactory $addGameNightFormFactory,
+            )
         {
             parent::__construct();
             $this->panDeskovekManager = $panDeskovekManager;
@@ -32,12 +35,31 @@ abstract class BasePresenter extends Presenter
             $this->redirect(':Admin:Homepage:default');
         }
     }
-    
+
+    protected function createComponentAddGameForm(): Form
+    {
+        $form = $this->addGameFormFactory->create();
+        $form->onSuccess[] = function (Form $form) {
+			$this->redirect("Homepage:default");
+		};
+        return $form;
+    }
+
+    protected function createComponentAddGameNightForm(): Form
+    {
+        $form = $this->addGameNightFormFactory->create();
+        $form->onSuccess[] = function (Form $form) {
+			$this->redirect("Homepage:default");
+		};
+        return $form;
+    }
+
+
+    /*
     protected function createComponentAddGameForm(): Form
     {
         $form = new Form();
         $form->addText('name', 'Jméno hry:');
-
         $form->addSubmit('send', 'Uložit hru');
         $form->onSuccess[] = [$this, 'addGameFormSucceeded'];
         return $form;
@@ -69,11 +91,6 @@ abstract class BasePresenter extends Presenter
         return $form;
     }
 
-    public function getTemplatesAssoc(): array
-    {
-	return $this->panDeskovekManager->getBoardgames()->fetchAssoc('boardgame_id=name');
-    }
-
     public function addGameNightFormSucceeded(ArrayHash $data)
     {
         if (!$this->getUser()->isAllowed('PanDeskovek', 'addGame')) {
@@ -84,6 +101,12 @@ abstract class BasePresenter extends Presenter
         $this->flashMessage('Hra byla úspěšně přidána','sucess');
         $this->redirect('this');
     }
+
+    public function getTemplatesAssoc(): array
+    {
+	return $this->panDeskovekManager->getBoardgames()->fetchAssoc('boardgame_id=name');
+    }
+    */
 
     public function actionSignOut()
     {

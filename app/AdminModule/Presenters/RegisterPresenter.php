@@ -8,13 +8,16 @@ use Nette;
 use Nette\Application\UI\Form;
 use App\Model\MyAuthenticator;
 use App\AdminModule\Presenters\HomepagePresenter;
+use App\AdminModule\Forms\RegisterFormFactory;
+
 
 final class RegisterPresenter extends Nette\Application\UI\Presenter
 {
 
-    private $myAuthenticator;
-
-    public function __construct(Myauthenticator $myAuthenticator)
+    public function __construct(
+        private Myauthenticator $myAuthenticator,
+        private RegisterFormFactory $RegisterFactory,
+        )
     {
         parent::__construct();
         $this->myAuthenticator = $myAuthenticator;
@@ -27,22 +30,12 @@ final class RegisterPresenter extends Nette\Application\UI\Presenter
         $this->redirect('Homepage:default');
     }
 
-    public function createComponentRegisterForm(): Form
+    protected function createComponentRegisterForm(): Form
     {
-        $form = new Form();
-        $form->addText('username','Username');
-        $form->addPassword('password', 'Password');
-        $form->addSubmit('send', 'Zaregistrovat');
-        $form->onSuccess[] = [$this, 'registerFormSuccess'];
-
+        $form = $this->RegisterFactory->create();
+        $form->onSuccess[] = function (Form $form) {
+            $this->redirect('Homepage:default');
+		};
         return $form;
-    }
-
-    public function registerFormSuccess($form)
-    {
-        $values = $form->getValues();
-        $this->myAuthenticator->registering($values->username, $values->password, $values->role);
-        $this->getUser()->login($values->username, $values->password);
-        $this->redirect('Register:default');
     }
 }

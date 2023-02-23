@@ -12,17 +12,20 @@ use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
 use Nette\Database\UniqueConstraintViolationException;
 use Nette\Utils\ArrayHash;
+use App\ReceptyModule\Forms\EditorRecipesFormFactory;
 
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
-    /** @var ReceptyManager Model pro správu s článků. */
-    private $receptyManager;
+
 
     /**
      * Konstruktor s injektovaným modelem pro správu článků.
      * @param ReceptyManager $travelManager automaticky injektovaný model pro správu článků
      */
-    public function __construct(ReceptyManager $receptyManager)
+    public function __construct(
+        private ReceptyManager $receptyManager,
+        private EditorRecipesFormFactory $editorRecipesFactory,
+        )
     {
         parent::__construct();
         $this->receptyManager = $receptyManager;
@@ -74,34 +77,22 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         if ($postID) {
             if (!($article = $this->receptyManager->getRecipe($postID)))
                 $this->flashMessage('Článek nebyl nalezen.'); // Výpis chybové hlášky.
-            else $this['editorForm']->setDefaults($article); // Předání hodnot článku do editačního formuláře.
+            else $this['editorReciupesForm']->setDefaults($article); // Předání hodnot článku do editačního formuláře.
         }
     }
     
     /**
-     * createComponentEditorForm
+     * createComponentEditorRecipesForm
      * Vykresli formular
      * @return Form
      */
-    protected function createComponentEditorForm(): Form
+    protected function createComponentEditorRecipesForm(): Form
     {
-        $form = new Form;
-        $form->addText('title')
-            ->setRequired()
-            ->setHtmlAttribute('placeholder', 'Název receptu');
-        $form->addTextArea('recipe')
-            ->setHtmlAttribute('placeholder', 'Postup');
-        $form->addSubmit('send', 'Uložit')
-            ->setHtmlAttribute('class', 'btn btn-success');
-        $form->onSuccess[] = [$this, 'editorFormSucceeded'];
+        $form = $this->editorRecipesFactory->create();
+        $form->onSuccess[] = function (Form $form) {
+            $this->redirect('Homepage:default');
+		};
         return $form;
-    }
-
-    public function editorFormSucceeded(ArrayHash $data)
-    {
-        $post = $this->receptyManager->saveRecipe($data);
-        $this->flashMessage('Článek byl úspěšně uložen.');
-        $this->redirect('Homepage:Post', $post->recipes_id );
     }
 
     public function actionSignOut()

@@ -5,3 +5,13 @@ services:
 	- App\Model\PanDeskovekManager
 	- App\Model\ReceptyManager
 	- App\Security\AuthorizatorFactory::create
+	- App\AdminModule\Forms\FormFactory
+	- App\AdminModule\Forms\SignInFormFactory
+	- App\AdminModule\Forms\RegisterFormFactory
+	- App\ReceptyModule\Forms\FormFactory
+	- App\ReceptyModule\Forms\EditorRecipesFormFactory
+	- App\BlogModule\Forms\FormFactory
+	- App\BlogModule\Forms\EditorFormFactory
+	- App\PanDeskovekModule\Forms\FormFactory
+	- App\PanDeskovekModule\Forms\AddGameFormFactory
+	- App\PanDeskovekModule\Forms\AddGameNightFormFactory
