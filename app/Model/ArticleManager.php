@@ -21,7 +21,6 @@ class ArticleManager extends DatabaseManager
         TABLE_NAME = 'travel_posts',
         COLUMN_ID = 'id';
 
-    
     /**
      * getTravels
      * Vrátí určitý počet článků
@@ -34,8 +33,7 @@ class ArticleManager extends DatabaseManager
             return $this->database->table(SELF::TABLE_NAME)->order(self::COLUMN_ID . ' DESC')->limit($limit);
         else
             return $this->database->table(SELF::TABLE_NAME)->order(self::COLUMN_ID . ' DESC');
-
-    }    
+    }
          
     /**
      * Vrátí článek z databáze podle jeho ID.

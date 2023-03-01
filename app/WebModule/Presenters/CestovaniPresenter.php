@@ -5,36 +5,29 @@ declare(strict_types=1);
 namespace App\WebModule\Presenters;
 
 use Nette;
-use App\Model\ArticleManager;
 use App\Presenters\BasePresenter;
+use App\Model\orm\Travel_postsRepository;
 
 final class CestovaniPresenter extends Nette\Application\UI\Presenter
 {
-        /** @var ArticleManager Model pro správu s článků. */
-        private $articleManager;
+        /** @var Travel_postsRepository @inject */
+        public $travel_postsRepository;
 
-        /**
-         * Konstruktor s injektovaným modelem pro správu článků.
-         * @param ArticleManager $travelManager automaticky injektovaný model pro správu článků
-         */
-        public function __construct(ArticleManager $articleManager)
-        {
-            parent::__construct();
-            $this->articleManager = $articleManager;
-        }
-        
         /** Načte a předá seznam článků do šablony. */
         public function renderDefault()
         {
-            $this->template->posts = $this->articleManager->getTravels(0);
+            $this->template->posts = $this->travel_postsRepository->findAll();
         }
-
+        
         /**
-         * Načte a předá článek do šablony podle jeho ID.
-         * @param string|null $postId ID článku
+         * renderPost
+         *Načte a předá článek do šablony podle jeho ID.
+         * @param  mixed $postId
+         * @return void
          */
         public function renderPost(int $postId)
         {
-            $this->template->post = $this->articleManager->getTravel($postId);
+            $this->template->post = $this->travel_postsRepository->getById($postId);
+            
         }
 }

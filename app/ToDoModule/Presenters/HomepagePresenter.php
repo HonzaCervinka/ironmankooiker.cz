@@ -7,22 +7,20 @@ namespace App\ToDoModule\Presenters;
 use Nette;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IComponent;
+use app\model\orm\ShoppingRepository;
+use app\model\orm\TasksRepository;
+use app\model\orm\Shopping;
+use app\model\orm\Task;
+
 
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
-	private Nette\Database\Explorer $database;
-	
-	/**
-	 * __construct
-	 * slouzi k pripojeni k databazi
-	 * @param  mixed $database
-	 * @return void
-	 */
-	public function __construct(Nette\Database\Explorer $database)
-	{
-		$this->database = $database;
-	}
+    /** @var ShoppingRepository @inject */
+    public $shoppingRepository;
 
+    /** @var TasksRepository @inject */
+    public $tasksRepository;
+        
     /**
      * renderDefault
      * načte obsah z databáze a pošle je do šablony, která se vykreslí
@@ -30,13 +28,37 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
      */
     public function renderDefault(): void
     {
-        $this->template->shopping = $this->database
-            ->table('shopping')
-            ->order('id');
+        $this->template->shopping = $this->shoppingRepository->findAll();
             
-        $this->template->tasks = $this->database
-            ->table('tasks')
-            ->order('id');   
+        $this->template->tasks = $this->tasksRepository->findAll();
+    }
+
+    /**
+     * handleRemoveShop
+     * smazání prvu z databáze pro nakup
+     * @param  mixed $id
+     * @return void
+     */
+    public function handleRemoveShop($id)
+    {
+        $goods = $this->shoppingRepository->getById($id);
+
+        $this->shoppingRepository->removeAndFlush($goods);
+        $this->redirect('this');
+    }
+
+    /**
+     * handleRemoveTasks
+     * smazání prvu z databáze ukolu
+     * @param  mixed $id
+     * @return void
+     */
+    public function handleRemoveTasks($id)
+    {
+        $task = $this->tasksRepository->getById($id);
+
+        $this->tasksRepository->removeAndFlush($task);
+        $this->redirect('this');
     }
     
     /**
@@ -57,45 +79,25 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         return $form;
     }
 
-    /**
-     * shopFormSucceeded
-     * přidá nákup do seznamu
-     * @param  mixed $data
-     * @return void
-     */
-    public function shopFormSucceeded(array $data): void
-    {
-        $shop = $this->database
-            ->table('shopping')
-            ->insert($data);
 
-            $this->redirect(':Default');
+    public function shopFormSucceeded(Form $form, $data): void
+    {
+        $shopping = new Shopping();
+        $shopping->goods = $data->goods;
+
+        $this->shoppingRepository->persistAndFlush($shopping);
+        $this->redirect('this');
+    }
+
+        protected function createComponentAddGameForm(): Form
+    {
+        $form = $this->addGameFormFactory->create();
+        $form->onSuccess[] = function (Form $form) {
+			$this->redirect("Homepage:default");
+		};
+        return $form;
     }
     
-    /**
-     * handleRemoveShop
-     * smazání prvu z databáze pro nakup
-     * @param  mixed $id
-     * @return void
-     */
-    public function handleRemoveShop($id)
-    {
-        $this->database->query('DELETE FROM shopping WHERE id = ?', $id);
-        $this->redirect(':Default');
-    }
-
-    /**
-     * renderTasks
-     * načte obsah z databáze ukolu a pošle je do šablony, která se vykreslí
-     * @return void
-     */
-    public function renderTasks(): void
-    {
-        $this->template->tasks = $this->database
-            ->table('tasks')
-            ->order('id');        
-    }
-
     /**
      * createComponentTasksForm
      * vytvoří formulář pro vložení do databaze ukolu
@@ -120,24 +122,12 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
      * @param  mixed $data
      * @return void
      */
-    public function tasksFormSucceeded(array $data): void
+    public function tasksFormSucceeded(Form $form, $data): void
     {
-        $shop = $this->database
-            ->table('tasks')
-            ->insert($data);
+        $tasks = new Task();
+        $tasks->task = $data->task;
 
-            $this->redirect(':Default');
-    }
-
-    /**
-     * handleRemoveTasks
-     * smazání prvu z databáze ukolu
-     * @param  mixed $id
-     * @return void
-     */
-    public function handleRemoveTasks($id)
-    {
-        $this->database->query('DELETE FROM tasks WHERE id = ?', $id);
-        $this->redirect(':Default');
+        $this->tasksRepository->persistAndFlush($tasks);
+        $this->redirect('this');
     }
 }

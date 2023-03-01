@@ -7,6 +7,8 @@ namespace Composer\Autoload;
 class ComposerStaticInitbaffb8a8445739b6af190f33738c6458
 {
     public static $files = array (
+        'a5f26a3f3f192c1d07586b1de3779617' => __DIR__ . '/..' . '/nextras/dbal/srcCompat/compatibility.php',
+        '6b93d92fcd95a76f6607b35b745ae78f' => __DIR__ . '/..' . '/nextras/orm/srcCompat/compatibility.php',
         'd507e002f7fce7f0c6dbf1f22edcb902' => __DIR__ . '/..' . '/tracy/tracy/src/Tracy/functions.php',
     );
 
@@ -14,6 +16,11 @@ class ComposerStaticInitbaffb8a8445739b6af190f33738c6458
         'S' => 
         array (
             'Symfony\\Thanks\\' => 15,
+        ),
+        'N' => 
+        array (
+            'Nextras\\Orm\\' => 12,
+            'Nextras\\Dbal\\' => 13,
         ),
         'A' => 
         array (
@@ -25,6 +32,14 @@ class ComposerStaticInitbaffb8a8445739b6af190f33738c6458
         'Symfony\\Thanks\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/thanks/src',
+        ),
+        'Nextras\\Orm\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nextras/orm/src',
+        ),
+        'Nextras\\Dbal\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nextras/dbal/src',
         ),
         'App\\' => 
         array (
@@ -428,6 +443,10 @@ class ComposerStaticInitbaffb8a8445739b6af190f33738c6458
         'Nette\\Security\\UserStorage' => __DIR__ . '/..' . '/nette/security/src/Security/UserStorage.php',
         'Nette\\SmartObject' => __DIR__ . '/..' . '/nette/utils/src/SmartObject.php',
         'Nette\\StaticClass' => __DIR__ . '/..' . '/nette/utils/src/StaticClass.php',
+        'Nette\\Tokenizer\\Exception' => __DIR__ . '/..' . '/nette/tokenizer/src/Tokenizer/Exception.php',
+        'Nette\\Tokenizer\\Stream' => __DIR__ . '/..' . '/nette/tokenizer/src/Tokenizer/Stream.php',
+        'Nette\\Tokenizer\\Token' => __DIR__ . '/..' . '/nette/tokenizer/src/Tokenizer/Token.php',
+        'Nette\\Tokenizer\\Tokenizer' => __DIR__ . '/..' . '/nette/tokenizer/src/Tokenizer/Tokenizer.php',
         'Nette\\UnexpectedValueException' => __DIR__ . '/..' . '/nette/utils/src/exceptions.php',
         'Nette\\Utils\\ArrayHash' => __DIR__ . '/..' . '/nette/utils/src/Utils/ArrayHash.php',
         'Nette\\Utils\\ArrayList' => __DIR__ . '/..' . '/nette/utils/src/Utils/ArrayList.php',
@@ -452,6 +471,9 @@ class ComposerStaticInitbaffb8a8445739b6af190f33738c6458
         'Nette\\Utils\\Reflection' => __DIR__ . '/..' . '/nette/utils/src/Utils/Reflection.php',
         'Nette\\Utils\\RegexpException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Strings' => __DIR__ . '/..' . '/nette/utils/src/Utils/Strings.php',
+        'Nette\\Utils\\TokenIterator' => __DIR__ . '/..' . '/nette/tokenizer/src/Utils/TokenIterator.php',
+        'Nette\\Utils\\Tokenizer' => __DIR__ . '/..' . '/nette/tokenizer/src/Utils/Tokenizer.php',
+        'Nette\\Utils\\TokenizerException' => __DIR__ . '/..' . '/nette/tokenizer/src/Utils/TokenizerException.php',
         'Nette\\Utils\\Type' => __DIR__ . '/..' . '/nette/utils/src/Utils/Type.php',
         'Nette\\Utils\\UnknownImageFileException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Validators' => __DIR__ . '/..' . '/nette/utils/src/Utils/Validators.php',

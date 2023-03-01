@@ -20,3 +20,19 @@ database:
 	dsn: 'mysql:host=127.0.0.1;dbname=ironmankooikercz4'
 	user: ironmankoo1
 	password: jtncKVChWZ38
+
+extensions:
+	nextras.orm: Nextras\Orm\Bridges\NetteDI\OrmExtension
+	nextras.dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
+
+nextras.orm:
+	model: app\model\orm\Model
+
+nextras.dbal:
+	driver: mysqli
+	host: 127.0.0.1
+	port: 3306
+	database: test
+	username:
+	password:
+	connectionTz: auto-offset
