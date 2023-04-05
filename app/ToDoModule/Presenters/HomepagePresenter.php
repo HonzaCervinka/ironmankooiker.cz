@@ -7,20 +7,23 @@ namespace App\ToDoModule\Presenters;
 use Nette;
 use Nette\Application\UI\Form;
 use Nette\ComponentModel\IComponent;
-use app\model\orm\ShoppingRepository;
-use app\model\orm\TasksRepository;
-use app\model\orm\Shopping;
-use app\model\orm\Task;
+use app\model\orm\Model;
+use App\ToDoModule\Forms\AddShoppingFormFactory;
+use App\ToDoModule\Forms\AddTasksFormFactory;
 
 
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
-    /** @var ShoppingRepository @inject */
-    public $shoppingRepository;
-
-    /** @var TasksRepository @inject */
-    public $tasksRepository;
+    /** @var Model @inject */
+    public $model;
         
+    public function __construct(
+        public AddShoppingFormFactory $addShoppingFormFactory,
+        public AddTasksFormFactory $addTasksFormFactory,
+        )
+    {
+    }
+
     /**
      * renderDefault
      * načte obsah z databáze a pošle je do šablony, která se vykreslí
@@ -28,9 +31,9 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
      */
     public function renderDefault(): void
     {
-        $this->template->shopping = $this->shoppingRepository->findAll();
+        $this->template->shopping = $this->model->shopping->findAll();
             
-        $this->template->tasks = $this->tasksRepository->findAll();
+        $this->template->tasks = $this->model->task->findAll();
     }
 
     /**
@@ -41,9 +44,9 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
      */
     public function handleRemoveShop($id)
     {
-        $goods = $this->shoppingRepository->getById($id);
+        $goods = $this->model->shopping->getById($id);
 
-        $this->shoppingRepository->removeAndFlush($goods);
+        $this->model->shopping->removeAndFlush($goods);
         $this->redirect('this');
     }
 
@@ -55,79 +58,37 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
      */
     public function handleRemoveTasks($id)
     {
-        $task = $this->tasksRepository->getById($id);
+        $task = $this->model->task->getById($id);
 
-        $this->tasksRepository->removeAndFlush($task);
+        $this->model->task->removeAndFlush($task);
         $this->redirect('this');
     }
-    
+        
     /**
-     * createComponentShopForm
+     * createComponentAddShoppingForm
      * vytvoří formulář pro vložení do databaze
      * @return Form
      */
-    protected function createComponentShopForm(): Form
+    protected function createComponentAddShoppingForm(): Form
     {
-        $form = new Form;
-        $form->addTextArea('goods', null )
-        ->setRequired();
-
-        $form->addImageButton('send', '../img/toDo/add.png');
-
-        $form->onSuccess[] = [$this, 'shopFormSucceeded'];
-
-        return $form;
-    }
-
-
-    public function shopFormSucceeded(Form $form, $data): void
-    {
-        $shopping = new Shopping();
-        $shopping->goods = $data->goods;
-
-        $this->shoppingRepository->persistAndFlush($shopping);
-        $this->redirect('this');
-    }
-
-        protected function createComponentAddGameForm(): Form
-    {
-        $form = $this->addGameFormFactory->create();
+        $form = $this->addShoppingFormFactory->create();
         $form->onSuccess[] = function (Form $form) {
 			$this->redirect("Homepage:default");
 		};
         return $form;
     }
-    
+
     /**
-     * createComponentTasksForm
-     * vytvoří formulář pro vložení do databaze ukolu
+     * createComponentAddTasksForm
+     * vytvoří formulář pro vložení do databaze
      * @return Form
      */
-    protected function createComponentTasksForm(): Form
+    protected function createComponentAddTasksForm(): Form
     {
-        $form = new Form;
-        $form->addTextArea('task', null )
-        ->setRequired();
-
-        $form->addImageButton('send', '../img/toDo/add.png');
-
-        $form->onSuccess[] = [$this, 'tasksFormSucceeded'];
-
+        $form = $this->addTasksFormFactory->create();
+        $form->onSuccess[] = function (Form $form) {
+			$this->redirect("Homepage:default");
+		};
         return $form;
-    }
-
-    /**
-     * shopFormSucceeded
-     * přidá ukol do seznamu
-     * @param  mixed $data
-     * @return void
-     */
-    public function tasksFormSucceeded(Form $form, $data): void
-    {
-        $tasks = new Task();
-        $tasks->task = $data->task;
-
-        $this->tasksRepository->persistAndFlush($tasks);
-        $this->redirect('this');
     }
 }

@@ -10,5 +10,4 @@ use Nextras\Orm\Entity\Entity;
  */
 class Shopping extends Entity
 {
-
 }

@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace App\PanDeskovekModule\Forms;
 
+use app\model\orm\Boardgame_list;
 use Nette;
 use Nette\Application\UI\Form;
 use Nette\Utils\ArrayHash;
 use App\Model\PanDeskovekManager;
 use app\model\orm\GameNight;
 use app\model\orm\Model;
+use Nextras\Orm\Entity\IEntity;
 
 final class AddGameNightFormFactory
 {
@@ -42,16 +44,16 @@ final class AddGameNightFormFactory
         
     public function addGameNightFormSucceeded(Form $form, $data)
     {
-        bdump($data);
+
         $gameNight = new GameNight();
         $gameNight->date = $data->date;
-        $gameNight->idGame = 23;
-        $gameNight->honza = '$data->honza';    
-        $gameNight->michal = '$data->michal';
-        $gameNight->sevi = '$data->sevi';
-        $gameNight->johny = '$data->johny';
-  
-        
+        $gameNight->idGame = $data->idGame;
+        $gameNight->honza = $data->honza;
+        $gameNight->michal = $data->michal;
+        $gameNight->sevi = $data->sevi;
+        $gameNight->johny = $data->johny;
+
+
         $this->model->gameNight->persistAndFlush($gameNight);
     }
 

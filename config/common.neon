@@ -26,7 +26,7 @@ extensions:
 	nextras.dbal: Nextras\Dbal\Bridges\NetteDI\DbalExtension
 
 nextras.orm:
-	model: app\model\orm\Model
+	model: App\Model\Orm\Model
 
 nextras.dbal:
 	driver: mysqli

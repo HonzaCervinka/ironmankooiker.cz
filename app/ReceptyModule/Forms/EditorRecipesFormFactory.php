@@ -6,8 +6,9 @@ namespace App\ReceptyModule\Forms;
 
 use Nette;
 use Nette\Application\UI\Form;
-use App\Model\ReceptyManager;
 use Nette\Utils\ArrayHash;
+use app\model\orm\Model;
+use app\model\orm\Recipe;
 
 final class EditorRecipesFormFactory
 {
@@ -15,7 +16,7 @@ final class EditorRecipesFormFactory
 
     public function __construct(
         private FormFactory $factory, 
-        private ReceptyManager $receptyManager,
+        private Model $model,
         )
 	{}
 
@@ -23,6 +24,7 @@ final class EditorRecipesFormFactory
     {
         $form = $this->factory->create();
         
+        $form->addHidden('id');
         $form->addText('title')
             ->setRequired()
             ->setHtmlAttribute('placeholder', 'Název receptu');
@@ -35,9 +37,13 @@ final class EditorRecipesFormFactory
         return $form;
     }
         
-    public function editorRecipesFormSuccess(Arrayhash $data)
+    public function editorRecipesFormSuccess(Form $form, $data)
     {
-        $post = $this->receptyManager->saveRecipe($data);
+        $recipe = $data->id ? $this->model->recipe->getById($data->id) : new Recipe(); // kontrola, zda se jedná o úpravu nebo přidání
+        $recipe->title = $data->title;
+        $recipe->recipe = $data->recipe;
+
+        $this->model->recipe->persistAndFlush($recipe);
     }
 
 

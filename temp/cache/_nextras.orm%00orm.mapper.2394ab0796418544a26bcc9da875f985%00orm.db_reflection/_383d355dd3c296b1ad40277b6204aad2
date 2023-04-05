@@ -1,0 +1,1 @@
+000068a:2:{s:4:"time";s:21:"0.03813100 1680267554";s:10:"serialized";b:1;}a:1:{s:7:"id_game";O:38:"Nextras\Dbal\Platforms\Data\ForeignKey":6:{s:4:"name";s:16:"gamenight_ibfk_1";s:6:"schema";s:4:"test";s:6:"column";s:7:"id_game";s:8:"refTable";s:14:"boardgame_list";s:14:"refTableSchema";s:4:"test";s:9:"refColumn";s:12:"boardgame_id";}}

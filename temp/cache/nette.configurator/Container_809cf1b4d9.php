@@ -62,34 +62,67 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 		'Tracy\BlueScreen' => [['tracy.blueScreen']],
 		'Tracy\Bar' => [['tracy.bar']],
 		'Nextras\Orm\Mapper\Mapper' => [
-			['nextras.orm.mappers.travel_posts', 'nextras.orm.mappers.shopping', 'nextras.orm.mappers.tasks'],
+			[
+				'nextras.orm.mappers.travel_posts',
+				'nextras.orm.mappers.shopping',
+				'nextras.orm.mappers.task',
+				'nextras.orm.mappers.boardgame_list',
+				'nextras.orm.mappers.gameNight',
+				'nextras.orm.mappers.recipe',
+			],
 		],
 		'Nextras\Orm\Mapper\Dbal\DbalMapper' => [
-			['nextras.orm.mappers.travel_posts', 'nextras.orm.mappers.shopping', 'nextras.orm.mappers.tasks'],
+			[
+				'nextras.orm.mappers.travel_posts',
+				'nextras.orm.mappers.shopping',
+				'nextras.orm.mappers.task',
+				'nextras.orm.mappers.boardgame_list',
+				'nextras.orm.mappers.gameNight',
+				'nextras.orm.mappers.recipe',
+			],
 		],
 		'Nextras\Orm\Mapper\IMapper' => [
-			['nextras.orm.mappers.travel_posts', 'nextras.orm.mappers.shopping', 'nextras.orm.mappers.tasks'],
+			[
+				'nextras.orm.mappers.travel_posts',
+				'nextras.orm.mappers.shopping',
+				'nextras.orm.mappers.task',
+				'nextras.orm.mappers.boardgame_list',
+				'nextras.orm.mappers.gameNight',
+				'nextras.orm.mappers.recipe',
+			],
 		],
 		'app\model\orm\Travel_postsMapper' => [['nextras.orm.mappers.travel_posts']],
 		'Nextras\Orm\Repository\Repository' => [
 			[
 				'nextras.orm.repositories.travel_posts',
 				'nextras.orm.repositories.shopping',
-				'nextras.orm.repositories.tasks',
+				'nextras.orm.repositories.task',
+				'nextras.orm.repositories.boardgame_list',
+				'nextras.orm.repositories.gameNight',
+				'nextras.orm.repositories.recipe',
 			],
 		],
 		'Nextras\Orm\Repository\IRepository' => [
 			[
 				'nextras.orm.repositories.travel_posts',
 				'nextras.orm.repositories.shopping',
-				'nextras.orm.repositories.tasks',
+				'nextras.orm.repositories.task',
+				'nextras.orm.repositories.boardgame_list',
+				'nextras.orm.repositories.gameNight',
+				'nextras.orm.repositories.recipe',
 			],
 		],
 		'app\model\orm\Travel_postsRepository' => [['nextras.orm.repositories.travel_posts']],
 		'app\model\orm\ShoppingMapper' => [['nextras.orm.mappers.shopping']],
 		'app\model\orm\ShoppingRepository' => [['nextras.orm.repositories.shopping']],
-		'app\model\orm\TasksMapper' => [['nextras.orm.mappers.tasks']],
-		'app\model\orm\TasksRepository' => [['nextras.orm.repositories.tasks']],
+		'app\model\orm\TasksMapper' => [['nextras.orm.mappers.task']],
+		'app\model\orm\TasksRepository' => [['nextras.orm.repositories.task']],
+		'app\model\orm\Boardgame_listMapper' => [['nextras.orm.mappers.boardgame_list']],
+		'app\model\orm\Boardgame_listRepository' => [['nextras.orm.repositories.boardgame_list']],
+		'app\model\orm\GameNightMapper' => [['nextras.orm.mappers.gameNight']],
+		'app\model\orm\GameNightRepository' => [['nextras.orm.repositories.gameNight']],
+		'app\model\orm\RecipesMapper' => [['nextras.orm.mappers.recipe']],
+		'app\model\orm\RecipesRepository' => [['nextras.orm.repositories.recipe']],
 		'Nextras\Orm\Model\IRepositoryLoader' => [['nextras.orm.repositoryLoader']],
 		'Nextras\Orm\Bridges\NetteDI\RepositoryLoader' => [['nextras.orm.repositoryLoader']],
 		'Nette\Caching\Cache' => [2 => ['nextras.orm.cache']],
@@ -128,22 +161,24 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 		'Nette\Security\Authenticator' => [['02']],
 		'Nette\Security\IAuthenticator' => [['02']],
 		'App\Model\MyAuthenticator' => [['02']],
-		'App\Model\DatabaseManager' => [['03', '04', '05']],
+		'App\Model\DatabaseManager' => [['03', '04']],
 		'App\Model\ArticleManager' => [['03']],
 		'App\Model\PanDeskovekManager' => [['04']],
-		'App\Model\ReceptyManager' => [['05']],
-		'Nette\Security\Authorizator' => [['06']],
-		'Nette\Security\Permission' => [['06']],
-		'App\AdminModule\Forms\FormFactory' => [['07']],
-		'App\AdminModule\Forms\SignInFormFactory' => [['08']],
-		'App\AdminModule\Forms\RegisterFormFactory' => [['09']],
-		'App\ReceptyModule\Forms\FormFactory' => [['010']],
-		'App\ReceptyModule\Forms\EditorRecipesFormFactory' => [['011']],
-		'App\BlogModule\Forms\FormFactory' => [['012']],
-		'App\BlogModule\Forms\EditorFormFactory' => [['013']],
-		'App\PanDeskovekModule\Forms\FormFactory' => [['014']],
-		'App\PanDeskovekModule\Forms\AddGameFormFactory' => [['015']],
-		'App\PanDeskovekModule\Forms\AddGameNightFormFactory' => [['016']],
+		'Nette\Security\Authorizator' => [['05']],
+		'Nette\Security\Permission' => [['05']],
+		'App\AdminModule\Forms\FormFactory' => [['06']],
+		'App\AdminModule\Forms\SignInFormFactory' => [['07']],
+		'App\AdminModule\Forms\RegisterFormFactory' => [['08']],
+		'App\ReceptyModule\Forms\FormFactory' => [['09']],
+		'App\ReceptyModule\Forms\EditorRecipesFormFactory' => [['010']],
+		'App\BlogModule\Forms\FormFactory' => [['011']],
+		'App\BlogModule\Forms\EditorFormFactory' => [['012']],
+		'App\PanDeskovekModule\Forms\FormFactory' => [['013']],
+		'App\PanDeskovekModule\Forms\AddGameFormFactory' => [['014']],
+		'App\PanDeskovekModule\Forms\AddGameNightFormFactory' => [['015']],
+		'App\ToDoModule\Forms\FormFactory' => [['016']],
+		'App\ToDoModule\Forms\AddShoppingFormFactory' => [['017']],
+		'App\ToDoModule\Forms\AddTasksFormFactory' => [['018']],
 		'Nette\Application\IPresenter' => [
 			2 => [
 				'application.1',
@@ -374,79 +409,95 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 	}
 
 
-	public function createService05(): App\Model\ReceptyManager
-	{
-		return new App\Model\ReceptyManager($this->getService('database.default.context'));
-	}
-
-
-	public function createService06(): Nette\Security\Permission
+	public function createService05(): Nette\Security\Permission
 	{
 		return App\Security\AuthorizatorFactory::create();
 	}
 
 
-	public function createService07(): App\AdminModule\Forms\FormFactory
+	public function createService06(): App\AdminModule\Forms\FormFactory
 	{
 		return new App\AdminModule\Forms\FormFactory;
 	}
 
 
-	public function createService08(): App\AdminModule\Forms\SignInFormFactory
+	public function createService07(): App\AdminModule\Forms\SignInFormFactory
 	{
-		return new App\AdminModule\Forms\SignInFormFactory($this->getService('07'), $this->getService('security.user'));
+		return new App\AdminModule\Forms\SignInFormFactory($this->getService('06'), $this->getService('security.user'));
 	}
 
 
-	public function createService09(): App\AdminModule\Forms\RegisterFormFactory
+	public function createService08(): App\AdminModule\Forms\RegisterFormFactory
 	{
 		return new App\AdminModule\Forms\RegisterFormFactory(
-			$this->getService('07'),
+			$this->getService('06'),
 			$this->getService('02'),
 			$this->getService('security.user')
 		);
 	}
 
 
-	public function createService010(): App\ReceptyModule\Forms\FormFactory
+	public function createService09(): App\ReceptyModule\Forms\FormFactory
 	{
 		return new App\ReceptyModule\Forms\FormFactory;
 	}
 
 
-	public function createService011(): App\ReceptyModule\Forms\EditorRecipesFormFactory
+	public function createService010(): App\ReceptyModule\Forms\EditorRecipesFormFactory
 	{
-		return new App\ReceptyModule\Forms\EditorRecipesFormFactory($this->getService('010'), $this->getService('05'));
+		return new App\ReceptyModule\Forms\EditorRecipesFormFactory($this->getService('09'), $this->getService('nextras.orm.model'));
 	}
 
 
-	public function createService012(): App\BlogModule\Forms\FormFactory
+	public function createService011(): App\BlogModule\Forms\FormFactory
 	{
 		return new App\BlogModule\Forms\FormFactory;
 	}
 
 
-	public function createService013(): App\BlogModule\Forms\EditorFormFactory
+	public function createService012(): App\BlogModule\Forms\EditorFormFactory
 	{
-		return new App\BlogModule\Forms\EditorFormFactory($this->getService('012'), $this->getService('03'));
+		return new App\BlogModule\Forms\EditorFormFactory($this->getService('011'), $this->getService('03'));
 	}
 
 
-	public function createService014(): App\PanDeskovekModule\Forms\FormFactory
+	public function createService013(): App\PanDeskovekModule\Forms\FormFactory
 	{
 		return new App\PanDeskovekModule\Forms\FormFactory;
 	}
 
 
-	public function createService015(): App\PanDeskovekModule\Forms\AddGameFormFactory
+	public function createService014(): App\PanDeskovekModule\Forms\AddGameFormFactory
 	{
-		return new App\PanDeskovekModule\Forms\AddGameFormFactory($this->getService('014'), $this->getService('04'));
+		return new App\PanDeskovekModule\Forms\AddGameFormFactory($this->getService('013'), $this->getService('04'));
 	}
 
 
-	public function createService016(): App\PanDeskovekModule\Forms\AddGameNightFormFactory
+	public function createService015(): App\PanDeskovekModule\Forms\AddGameNightFormFactory
 	{
-		return new App\PanDeskovekModule\Forms\AddGameNightFormFactory($this->getService('014'), $this->getService('04'));
+		return new App\PanDeskovekModule\Forms\AddGameNightFormFactory(
+			$this->getService('013'),
+			$this->getService('04'),
+			$this->getService('nextras.orm.model')
+		);
+	}
+
+
+	public function createService016(): App\ToDoModule\Forms\FormFactory
+	{
+		return new App\ToDoModule\Forms\FormFactory;
+	}
+
+
+	public function createService017(): App\ToDoModule\Forms\AddShoppingFormFactory
+	{
+		return new App\ToDoModule\Forms\AddShoppingFormFactory($this->getService('016'), $this->getService('nextras.orm.model'));
+	}
+
+
+	public function createService018(): App\ToDoModule\Forms\AddTasksFormFactory
+	{
+		return new App\ToDoModule\Forms\AddTasksFormFactory($this->getService('016'), $this->getService('nextras.orm.model'));
 	}
 
 
@@ -479,8 +530,8 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 	{
 		$service = new App\PanDeskovekModule\Presenters\HomepagePresenter(
 			$this->getService('04'),
-			$this->getService('015'),
-			$this->getService('016')
+			$this->getService('014'),
+			$this->getService('015')
 		);
 		$service->injectPrimary(
 			$this,
@@ -492,6 +543,8 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory')
 		);
+		$service->gameNightRepository = $this->getService('nextras.orm.repositories.gameNight');
+		$service->boardgame_listRepository = $this->getService('nextras.orm.repositories.boardgame_list');
 		$service->invalidLinkMode = 5;
 		return $service;
 	}
@@ -501,8 +554,8 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 	{
 		$service = new App\PanDeskovekModule\Presenters\StatisticPresenter(
 			$this->getService('04'),
-			$this->getService('015'),
-			$this->getService('016')
+			$this->getService('014'),
+			$this->getService('015')
 		);
 		$service->injectPrimary(
 			$this,
@@ -521,7 +574,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 
 	public function createServiceApplication__13(): App\ToDoModule\Presenters\HomepagePresenter
 	{
-		$service = new App\ToDoModule\Presenters\HomepagePresenter;
+		$service = new App\ToDoModule\Presenters\HomepagePresenter($this->getService('017'), $this->getService('018'));
 		$service->injectPrimary(
 			$this,
 			$this->getService('application.presenterFactory'),
@@ -532,8 +585,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory')
 		);
-		$service->tasksRepository = $this->getService('nextras.orm.repositories.tasks');
-		$service->shoppingRepository = $this->getService('nextras.orm.repositories.shopping');
+		$service->model = $this->getService('nextras.orm.model');
 		$service->invalidLinkMode = 5;
 		return $service;
 	}
@@ -571,7 +623,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 
 	public function createServiceApplication__3(): App\BlogModule\Presenters\HomepagePresenter
 	{
-		$service = new App\BlogModule\Presenters\HomepagePresenter($this->getService('03'), $this->getService('013'));
+		$service = new App\BlogModule\Presenters\HomepagePresenter($this->getService('03'), $this->getService('012'));
 		$service->injectPrimary(
 			$this,
 			$this->getService('application.presenterFactory'),
@@ -589,7 +641,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 
 	public function createServiceApplication__4(): App\AdminModule\Presenters\RegisterPresenter
 	{
-		$service = new App\AdminModule\Presenters\RegisterPresenter($this->getService('02'), $this->getService('09'));
+		$service = new App\AdminModule\Presenters\RegisterPresenter($this->getService('02'), $this->getService('08'));
 		$service->injectPrimary(
 			$this,
 			$this->getService('application.presenterFactory'),
@@ -607,7 +659,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 
 	public function createServiceApplication__5(): App\AdminModule\Presenters\HomepagePresenter
 	{
-		$service = new App\AdminModule\Presenters\HomepagePresenter($this->getService('08'));
+		$service = new App\AdminModule\Presenters\HomepagePresenter($this->getService('07'));
 		$service->injectPrimary(
 			$this,
 			$this->getService('application.presenterFactory'),
@@ -625,7 +677,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 
 	public function createServiceApplication__6(): App\ReceptyModule\Presenters\HomepagePresenter
 	{
-		$service = new App\ReceptyModule\Presenters\HomepagePresenter($this->getService('05'), $this->getService('011'));
+		$service = new App\ReceptyModule\Presenters\HomepagePresenter($this->getService('010'));
 		$service->injectPrimary(
 			$this,
 			$this->getService('application.presenterFactory'),
@@ -636,6 +688,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 			$this->getService('security.user'),
 			$this->getService('latte.templateFactory')
 		);
+		$service->model = $this->getService('nextras.orm.model');
 		$service->invalidLinkMode = 5;
 		return $service;
 	}
@@ -902,6 +955,36 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 	}
 
 
+	public function createServiceNextras__orm__mappers__boardgame_list(): app\model\orm\Boardgame_listMapper
+	{
+		return new app\model\orm\Boardgame_listMapper(
+			$this->getService('nextras.dbal.connection'),
+			$this->getService('nextras.orm.mapperCoordinator'),
+			$this->getService('nextras.orm.cache')
+		);
+	}
+
+
+	public function createServiceNextras__orm__mappers__gameNight(): app\model\orm\GameNightMapper
+	{
+		return new app\model\orm\GameNightMapper(
+			$this->getService('nextras.dbal.connection'),
+			$this->getService('nextras.orm.mapperCoordinator'),
+			$this->getService('nextras.orm.cache')
+		);
+	}
+
+
+	public function createServiceNextras__orm__mappers__recipe(): app\model\orm\RecipesMapper
+	{
+		return new app\model\orm\RecipesMapper(
+			$this->getService('nextras.dbal.connection'),
+			$this->getService('nextras.orm.mapperCoordinator'),
+			$this->getService('nextras.orm.cache')
+		);
+	}
+
+
 	public function createServiceNextras__orm__mappers__shopping(): app\model\orm\ShoppingMapper
 	{
 		return new app\model\orm\ShoppingMapper(
@@ -912,7 +995,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 	}
 
 
-	public function createServiceNextras__orm__mappers__tasks(): app\model\orm\TasksMapper
+	public function createServiceNextras__orm__mappers__task(): app\model\orm\TasksMapper
 	{
 		return new app\model\orm\TasksMapper(
 			$this->getService('nextras.dbal.connection'),
@@ -959,6 +1042,9 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'app\model\orm\Travel_post' => 'app\model\orm\Travel_postsRepository',
 				'app\model\orm\Shopping' => 'app\model\orm\ShoppingRepository',
 				'app\model\orm\Task' => 'app\model\orm\TasksRepository',
+				'app\model\orm\Boardgame_list' => 'app\model\orm\Boardgame_listRepository',
+				'app\model\orm\GameNight' => 'app\model\orm\GameNightRepository',
+				'app\model\orm\Recipe' => 'app\model\orm\RecipesRepository',
 			],
 			$this->getService('nextras.orm.cache'),
 			$this->getService('nextras.orm.metadataParserFactory'),
@@ -975,21 +1061,63 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 					'app\model\orm\Travel_postsRepository' => true,
 					'app\model\orm\ShoppingRepository' => true,
 					'app\model\orm\TasksRepository' => true,
+					'app\model\orm\Boardgame_listRepository' => true,
+					'app\model\orm\GameNightRepository' => true,
+					'app\model\orm\RecipesRepository' => true,
 				],
 				[
 					'travel_posts' => 'app\model\orm\Travel_postsRepository',
 					'shopping' => 'app\model\orm\ShoppingRepository',
-					'tasks' => 'app\model\orm\TasksRepository',
+					'task' => 'app\model\orm\TasksRepository',
+					'boardgame_list' => 'app\model\orm\Boardgame_listRepository',
+					'gameNight' => 'app\model\orm\GameNightRepository',
+					'recipe' => 'app\model\orm\RecipesRepository',
 				],
 				[
 					'app\model\orm\Travel_post' => 'app\model\orm\Travel_postsRepository',
 					'app\model\orm\Shopping' => 'app\model\orm\ShoppingRepository',
 					'app\model\orm\Task' => 'app\model\orm\TasksRepository',
+					'app\model\orm\Boardgame_list' => 'app\model\orm\Boardgame_listRepository',
+					'app\model\orm\GameNight' => 'app\model\orm\GameNightRepository',
+					'app\model\orm\Recipe' => 'app\model\orm\RecipesRepository',
 				],
 			],
 			$this->getService('nextras.orm.repositoryLoader'),
 			$this->getService('nextras.orm.metadataStorage')
 		);
+	}
+
+
+	public function createServiceNextras__orm__repositories__boardgame_list(): app\model\orm\Boardgame_listRepository
+	{
+		$service = new app\model\orm\Boardgame_listRepository(
+			$this->getService('nextras.orm.mappers.boardgame_list'),
+			$this->getService('nextras.orm.dependencyProvider')
+		);
+		$service->setModel($this->getService('nextras.orm.model'));
+		return $service;
+	}
+
+
+	public function createServiceNextras__orm__repositories__gameNight(): app\model\orm\GameNightRepository
+	{
+		$service = new app\model\orm\GameNightRepository(
+			$this->getService('nextras.orm.mappers.gameNight'),
+			$this->getService('nextras.orm.dependencyProvider')
+		);
+		$service->setModel($this->getService('nextras.orm.model'));
+		return $service;
+	}
+
+
+	public function createServiceNextras__orm__repositories__recipe(): app\model\orm\RecipesRepository
+	{
+		$service = new app\model\orm\RecipesRepository(
+			$this->getService('nextras.orm.mappers.recipe'),
+			$this->getService('nextras.orm.dependencyProvider')
+		);
+		$service->setModel($this->getService('nextras.orm.model'));
+		return $service;
 	}
 
 
@@ -1004,10 +1132,10 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 	}
 
 
-	public function createServiceNextras__orm__repositories__tasks(): app\model\orm\TasksRepository
+	public function createServiceNextras__orm__repositories__task(): app\model\orm\TasksRepository
 	{
 		$service = new app\model\orm\TasksRepository(
-			$this->getService('nextras.orm.mappers.tasks'),
+			$this->getService('nextras.orm.mappers.task'),
 			$this->getService('nextras.orm.dependencyProvider')
 		);
 		$service->setModel($this->getService('nextras.orm.model'));
@@ -1033,7 +1161,10 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 			[
 				'app\model\orm\Travel_postsRepository' => 'nextras.orm.repositories.travel_posts',
 				'app\model\orm\ShoppingRepository' => 'nextras.orm.repositories.shopping',
-				'app\model\orm\TasksRepository' => 'nextras.orm.repositories.tasks',
+				'app\model\orm\TasksRepository' => 'nextras.orm.repositories.task',
+				'app\model\orm\Boardgame_listRepository' => 'nextras.orm.repositories.boardgame_list',
+				'app\model\orm\GameNightRepository' => 'nextras.orm.repositories.gameNight',
+				'app\model\orm\RecipesRepository' => 'nextras.orm.repositories.recipe',
 			]
 		);
 	}
@@ -1056,7 +1187,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 		$service = new Nette\Security\User(
 			$this->getService('security.legacyUserStorage'),
 			$this->getService('02'),
-			$this->getService('06'),
+			$this->getService('05'),
 			$this->getService('security.userStorage')
 		);
 		$this->getService('tracy.bar')->addPanel(new Nette\Bridges\SecurityTracy\UserPanel($service));

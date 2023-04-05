@@ -5,30 +5,23 @@ declare(strict_types=1);
 namespace App\ReceptyModule\Presenters;
 
 use Nette;
-use App\Model\ReceptyManager;
+
 use App\Presenters\BasePresenter;
 use Nette\Application\AbortException;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Form;
-use Nette\Database\UniqueConstraintViolationException;
-use Nette\Utils\ArrayHash;
 use App\ReceptyModule\Forms\EditorRecipesFormFactory;
+use app\model\orm\Model;
 
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
+    /** @var Model @inject */
+    public $model;
 
-
-    /**
-     * Konstruktor s injektovaným modelem pro správu článků.
-     * @param ReceptyManager $travelManager automaticky injektovaný model pro správu článků
-     */
     public function __construct(
-        private ReceptyManager $receptyManager,
         private EditorRecipesFormFactory $editorRecipesFactory,
         )
     {
-        parent::__construct();
-        $this->receptyManager = $receptyManager;
     }
     
     protected function startup(): void {
@@ -42,29 +35,29 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
     /** Načte a předá seznam článků do šablony. */
     public function renderDefault()
     {
-        $this->template->posts = $this->receptyManager->getRecipes();
+        $this->template->posts = $this->model->recipe->findAll();
     }
 
     /**
      * Načte a předá článek do šablony podle jeho ID.
-     * @param string|null $postId ID článku
+     * @param string|null $id ID článku
      */
-    public function renderPost(int $postId)
+    public function renderPost(int $id)
     {
-        $this->template->post = $this->receptyManager->getRecipe($postId);
+        $this->template->post = $this->model->recipe->getById($id);
     }
-    
+        
     /**
-     * actionRemove
-     * Odstrani recept podle parametru ID
-     * @param  mixed $postID
+     * handleRemoveRecipe
+     * mazání prvu z databáze pro nakup
+     * @param  mixed $id
      * @return void
      */
-    public function actionRemove(int $postID)
+    public function handleRemoveRecipe($id)
     {
-        $this->receptyManager->removeRecipe($postID);
-        $this->flashMessage('Článek byl úspěšně odstraněn.');
-        $this->redirect('Homepage:default');
+        $recipe = $this->model->recipe->getById($id);
+        $this->model->recipe->removeAndFlush($recipe);
+        $this->redirect('this');
     }
     
     /**
@@ -72,12 +65,16 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
      * Pokud ID není zadána, nebo článek s daným ID neexistuje, vytvoří se nový.
      * @param int $postID ID článku
      */
-    public function actionEditor(int $postID = null)
+    public function actionEditor(int $id = null)
     {
-        if ($postID) {
-            if (!($article = $this->receptyManager->getRecipe($postID)))
+        if ($id) {
+            if (!($recipe = $this->model->recipe->getById($id)))
                 $this->flashMessage('Článek nebyl nalezen.'); // Výpis chybové hlášky.
-            else $this['editorReciupesForm']->setDefaults($article); // Předání hodnot článku do editačního formuláře.
+            else $this['editorRecipesForm']->setDefaults([
+                'id' => $recipe->id,
+                'title' => $recipe->title,
+                'recipe' => $recipe->recipe,
+            ]); // Předání hodnot článku do editačního formuláře.
         }
     }
     

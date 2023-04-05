@@ -36,6 +36,34 @@ abstract class BasePresenter extends Presenter
         }
     }
 
+    /**
+     * handleRemoveBoardgame
+     * smazání prvu z databáze pro nakup
+     * @param  mixed $id
+     * @return void
+     */
+    public function handleRemoveBoardgame($id)
+    {
+        $goods = $this->boardgame_listRepository->getById($id);
+
+        $this->boardgame_listRepository->removeAndFlush($goods);
+        $this->redirect('this');
+    }
+
+    /**
+     * handleRemoveBoardgame
+     * smazání prvu z databáze pro nakup
+     * @param  mixed $id
+     * @return void
+     */
+    public function handleRemoveGameNight($id)
+    {
+        $gameNight = $this->gameNightRepository->getById($id);
+
+        $this->gameNightRepository->removeAndFlush($gameNight);
+        $this->redirect('this');
+    }
+
     protected function createComponentAddGameForm(): Form
     {
         $form = $this->addGameFormFactory->create();
@@ -54,7 +82,18 @@ abstract class BasePresenter extends Presenter
         return $form;
     }
 
+    public function actionSignOut()
+    {
+        $this->getUser()->logout(true);
+        $this->flashMessage('Odhlasil ses', 'info');
+        $this->redirect(':Admin:Homepage:default');
+    }
+    
 
+
+
+
+    
     /*
     protected function createComponentAddGameForm(): Form
     {
@@ -106,21 +145,7 @@ abstract class BasePresenter extends Presenter
     {
 	return $this->panDeskovekManager->getBoardgames()->fetchAssoc('boardgame_id=name');
     }
-    */
 
-    public function actionSignOut()
-    {
-        $this->getUser()->logout(true);
-        $this->flashMessage('Odhlasil ses', 'info');
-        $this->redirect(':Admin:Homepage:default');
-    }
-
-    /**
-     * actionRemoveBoardGame
-     * Odstrani deskovou hru
-     * @param  mixed $postID
-     * @return void
-     */
     public function actionRemoveBoardGame(int $postID)
     {
         if (!$this->getUser()->isAllowed('PanDeskovek', 'RemoveBoardGame')) {
@@ -132,12 +157,6 @@ abstract class BasePresenter extends Presenter
         $this->redirect('Homepage:default');
     }
     
-    /**
-     * actionRemoveGameNight
-     * Odstrani herni sezeni
-     * @param  mixed $postID
-     * @return void
-     */
     public function actionRemoveGameNight(int $postID)
     {
         if (!$this->getUser()->isAllowed('PanDeskovek', 'RemoveGameNight')) {
@@ -148,4 +167,5 @@ abstract class BasePresenter extends Presenter
         $this->flashMessage('Herní sezení bylo odstraněno', 'success');
         $this->redirect('Homepage:default');
     }
+    */
 }

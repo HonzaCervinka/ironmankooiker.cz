@@ -39,7 +39,7 @@
 				<tbody>
 					<tr>
 						<td class= "align-middle">{$gameNight->date|date:'d.m.Y'}</td>
-						<td class= "align-middle">{$gameNight->name}</td>
+						<td class= "align-middle">{$gameNight->idGame->name}</td>
 						<td>
 						{if $gameNight->honza == 1} 
 						<img src="{$basePath}/img/panDeskovek/win.png "/>
@@ -68,7 +68,7 @@
 						<img src="{$basePath}/img/panDeskovek/loss.png "/>
 						{/if}
 						</td>
-						<td class="delete"><a n:href="removeGameNight $gameNight->gameNight_id"><i class="fa-solid fa-trash"></i></a></td>
+						<td class="delete"><a n:href="RemoveGameNight! $gameNight->id"><i class="fa-solid fa-trash"></i></a></td>
 					</tr>
 				</tbody>
 				{/foreach}
@@ -84,7 +84,7 @@
 				<tbody>
 					<tr>
 						<td>{$boardGame->name}</td>
-						<td class="delete"><a n:href="removeBoardgame $boardGame->boardgame_id"><i class="fa-solid fa-trash"></i></a></td>
+						<td class="delete"><a n:href="RemoveBoardgame! $boardGame->id"><i class="fa-solid fa-trash"></i></a></td>
 					</tr>
 				</tbody>
 				{/foreach}

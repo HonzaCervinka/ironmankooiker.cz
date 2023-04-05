@@ -17,10 +17,10 @@
 		<div class="row">
 			{foreach $posts as $post}
 			<div class="card">
-				<div class="card-body"><h2><a href="{link Homepage:Post $post->recipes_id}">{$post->title}</a></h2></div>
+				<div class="card-body"><h2><a href="{link Homepage:Post $post->id}">{$post->title}</a></h2></div>
 				<div class="card-footer">
-					<a n:href="editor $post->recipes_id" class="btn btn-success"><i class="fa-solid fa-pen-to-square "></i></a>
-					<a n:href="remove $post->recipes_id" class="btn btn-danger"><i class="fa-regular fa-trash"></i></a>
+					<a n:href="editor $post->id" class="btn btn-success"><i class="fa-solid fa-pen-to-square "></i></a>
+					<a n:href="RemoveRecipe! $post->id" class="btn btn-danger"><i class="fa-regular fa-trash"></i></a>
 				</div>
 			</div>
 			{/foreach}

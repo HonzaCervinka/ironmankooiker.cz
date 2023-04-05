@@ -136,7 +136,4 @@ class PanDeskovekManager extends DatabaseManager
         } else
             $this->database->table(self::BOARDGAME_TABLE_NAME)->where(self::BOARDGAME_COLUMN_ID, $data[self::BOARDGAME_COLUMN_ID])->update($data);
     }
-
-
-
 }
