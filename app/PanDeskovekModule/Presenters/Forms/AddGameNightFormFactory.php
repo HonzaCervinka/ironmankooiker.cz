@@ -8,6 +8,8 @@ use Nette;
 use Nette\Application\UI\Form;
 use Nette\Utils\ArrayHash;
 use App\Model\PanDeskovekManager;
+use app\model\orm\GameNight;
+use app\model\orm\Model;
 
 final class AddGameNightFormFactory
 {
@@ -16,6 +18,7 @@ final class AddGameNightFormFactory
     public function __construct(
         private FormFactory $factory,
         private PanDeskovekManager $panDeskovekManager,
+        private Model $model,
         )
 	{}
 
@@ -25,7 +28,8 @@ final class AddGameNightFormFactory
         
         $form->addText('date', 'Datum hraní:')
             ->setHtmlType('date');
-        $form->addSelect('id_game', 'Hra:',$this->getTemplatesAssoc());
+            
+        $form->addSelect('idGame', 'Hra:',$this->getTemplatesAssoc());
         $form->addCheckbox('honza', 'Honza');
         $form->addCheckbox('michal', 'Michal');
         $form->addCheckbox('sevi', 'Ševi');
@@ -36,13 +40,23 @@ final class AddGameNightFormFactory
         return $form;
     }
         
-    public function addGameNightFormSucceeded(ArrayHash $data)
+    public function addGameNightFormSucceeded(Form $form, $data)
     {
-        $post = $this->panDeskovekManager->saveGameNight($data);
+        bdump($data);
+        $gameNight = new GameNight();
+        $gameNight->date = $data->date;
+        $gameNight->idGame = 23;
+        $gameNight->honza = '$data->honza';    
+        $gameNight->michal = '$data->michal';
+        $gameNight->sevi = '$data->sevi';
+        $gameNight->johny = '$data->johny';
+  
+        
+        $this->model->gameNight->persistAndFlush($gameNight);
     }
 
     public function getTemplatesAssoc(): array
     {
-	return $this->panDeskovekManager->getBoardgames()->fetchAssoc('boardgame_id=name');
+        return $this->panDeskovekManager->getBoardgames()->fetchAssoc('boardgame_id=name');
     }
 }
