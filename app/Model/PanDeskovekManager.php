@@ -39,7 +39,7 @@ class PanDeskovekManager extends DatabaseManager
     }
 
     /**
-     * Vrátí seznam všech herních sezení v databázi seřazený sestupně od naposledy přidaného.
+     * Vrátí seznam všech herních sezení v databázi seřazenýgetBoardgames sestupně od naposledy přidaného.
      */
     public function getGameNights()
     {

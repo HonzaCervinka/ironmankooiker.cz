@@ -152,6 +152,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'Countable' => [2 => ['01']],
@@ -196,6 +197,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.13',
 				'application.14',
 				'application.15',
+				'application.16',
 			],
 		],
 		'App\ErrorModule\Presenters\ErrorPresenter' => [2 => ['application.1']],
@@ -213,6 +215,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'Nette\Application\UI\Control' => [
@@ -229,6 +232,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'Nette\Application\UI\Component' => [
@@ -245,6 +249,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'Nette\ComponentModel\Container' => [
@@ -261,6 +266,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'Nette\ComponentModel\Component' => [
@@ -277,6 +283,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'Nette\Application\UI\Renderable' => [
@@ -293,6 +300,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'Nette\Application\UI\StatePersistent' => [
@@ -309,6 +317,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'Nette\Application\UI\SignalReceiver' => [
@@ -325,6 +334,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'Nette\ComponentModel\IContainer' => [
@@ -341,6 +351,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'Nette\ComponentModel\IComponent' => [
@@ -357,6 +368,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 				'application.11',
 				'application.12',
 				'application.13',
+				'application.14',
 			],
 		],
 		'App\ErrorModule\Presenters\Error4xxPresenter' => [2 => ['application.2']],
@@ -368,12 +380,13 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 		'App\WebModule\Presenters\FotogaleriePresenter' => [2 => ['application.8']],
 		'App\WebModule\Presenters\InformacePresenter' => [2 => ['application.9']],
 		'App\WebModule\Presenters\HomepagePresenter' => [2 => ['application.10']],
-		'App\PanDeskovekModule\Presenters\BasePresenter' => [2 => ['application.11', 'application.12']],
-		'App\PanDeskovekModule\Presenters\HomepagePresenter' => [2 => ['application.11']],
-		'App\PanDeskovekModule\Presenters\StatisticPresenter' => [2 => ['application.12']],
-		'App\ToDoModule\Presenters\HomepagePresenter' => [2 => ['application.13']],
-		'NetteModule\ErrorPresenter' => [2 => ['application.14']],
-		'NetteModule\MicroPresenter' => [2 => ['application.15']],
+		'App\PanDeskovekModule\Presenters\BasePresenter' => [2 => ['application.11', 'application.12', 'application.13']],
+		'App\PanDeskovekModule\Presenters\DatagridPresenter' => [2 => ['application.11']],
+		'App\PanDeskovekModule\Presenters\HomepagePresenter' => [2 => ['application.12']],
+		'App\PanDeskovekModule\Presenters\StatisticPresenter' => [2 => ['application.13']],
+		'App\ToDoModule\Presenters\HomepagePresenter' => [2 => ['application.14']],
+		'NetteModule\ErrorPresenter' => [2 => ['application.15']],
+		'NetteModule\MicroPresenter' => [2 => ['application.16']],
 		'Nextras\Orm\Mapper\Dbal\DbalMapperCoordinator' => [['nextras.orm.mapperCoordinator']],
 	];
 
@@ -526,7 +539,30 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 	}
 
 
-	public function createServiceApplication__11(): App\PanDeskovekModule\Presenters\HomepagePresenter
+	public function createServiceApplication__11(): App\PanDeskovekModule\Presenters\DatagridPresenter
+	{
+		$service = new App\PanDeskovekModule\Presenters\DatagridPresenter(
+			$this->getService('04'),
+			$this->getService('014'),
+			$this->getService('015')
+		);
+		$service->injectPrimary(
+			$this,
+			$this->getService('application.presenterFactory'),
+			$this->getService('01'),
+			$this->getService('http.request'),
+			$this->getService('http.response'),
+			$this->getService('session.session'),
+			$this->getService('security.user'),
+			$this->getService('latte.templateFactory')
+		);
+		$service->boardgame_listRepository = $this->getService('nextras.orm.repositories.boardgame_list');
+		$service->invalidLinkMode = 5;
+		return $service;
+	}
+
+
+	public function createServiceApplication__12(): App\PanDeskovekModule\Presenters\HomepagePresenter
 	{
 		$service = new App\PanDeskovekModule\Presenters\HomepagePresenter(
 			$this->getService('04'),
@@ -550,7 +586,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 	}
 
 
-	public function createServiceApplication__12(): App\PanDeskovekModule\Presenters\StatisticPresenter
+	public function createServiceApplication__13(): App\PanDeskovekModule\Presenters\StatisticPresenter
 	{
 		$service = new App\PanDeskovekModule\Presenters\StatisticPresenter(
 			$this->getService('04'),
@@ -572,7 +608,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 	}
 
 
-	public function createServiceApplication__13(): App\ToDoModule\Presenters\HomepagePresenter
+	public function createServiceApplication__14(): App\ToDoModule\Presenters\HomepagePresenter
 	{
 		$service = new App\ToDoModule\Presenters\HomepagePresenter($this->getService('017'), $this->getService('018'));
 		$service->injectPrimary(
@@ -591,13 +627,13 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 	}
 
 
-	public function createServiceApplication__14(): NetteModule\ErrorPresenter
+	public function createServiceApplication__15(): NetteModule\ErrorPresenter
 	{
 		return new NetteModule\ErrorPresenter($this->getService('tracy.logger'));
 	}
 
 
-	public function createServiceApplication__15(): NetteModule\MicroPresenter
+	public function createServiceApplication__16(): NetteModule\MicroPresenter
 	{
 		return new NetteModule\MicroPresenter($this, $this->getService('http.request'), $this->getService('01'));
 	}

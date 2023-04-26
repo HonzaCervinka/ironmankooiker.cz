@@ -21,7 +21,8 @@
 		"latte/latte": "^2.9",
 		"tracy/tracy": "^2.8",
 		"nextras/dbal": "^4.0",
-		"nextras/orm": "^4.0"
+		"nextras/orm": "^4.0",
+		"ublaboo/datagrid": "^6.9"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3",

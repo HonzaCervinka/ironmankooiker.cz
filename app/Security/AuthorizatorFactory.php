@@ -18,6 +18,7 @@ class AuthorizatorFactory
         $acl->addResource('PanDeskovek:Homepage');
         $acl->addResource('PanDeskovek:Statistic');
         $acl->addResource('PanDeskovek:Base');
+        $acl->addResource('PanDeskovek:Datagrid');
         $acl->addResource('PanDeskovek');
 
         $acl->addResource('Recepty:Homepage');
@@ -28,7 +29,8 @@ class AuthorizatorFactory
 
         $acl->allow('admin');
         $acl->allow('guest', 'PanDeskovek:Homepage');
-        $acl->allow('guest', 'PanDeskovek:Statistic');       
+        $acl->allow('guest', 'PanDeskovek:Statistic');
+        $acl->allow('guest', 'PanDeskovek:Datagrid');
 
         return $acl;
     }
