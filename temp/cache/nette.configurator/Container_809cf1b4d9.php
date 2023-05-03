@@ -488,11 +488,7 @@ class Container_809cf1b4d9 extends Nette\DI\Container
 
 	public function createService015(): App\PanDeskovekModule\Forms\AddGameNightFormFactory
 	{
-		return new App\PanDeskovekModule\Forms\AddGameNightFormFactory(
-			$this->getService('013'),
-			$this->getService('04'),
-			$this->getService('nextras.orm.model')
-		);
+		return new App\PanDeskovekModule\Forms\AddGameNightFormFactory($this->getService('013'), $this->getService('nextras.orm.model'));
 	}
 
 
